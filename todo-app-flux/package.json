@@ -1,5 +1,5 @@
 {
-  "name": "react-project",
+  "name": "todo-app-flux",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -40,6 +40,8 @@
   },
   "dependencies": {
     "bootstrap-sass": "^3.3.5",
+    "flux": "^2.1.1",
+    "keymirror": "^0.1.1",
     "react": "^0.13.3"
   }
 }

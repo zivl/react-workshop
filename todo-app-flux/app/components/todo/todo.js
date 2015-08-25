@@ -4,6 +4,8 @@ import React from "react";
 import TodoList from "./todo-list/todo-list";
 import TodoForm from "./todo-form/todo-form";
 
+import TodoStore from '../../stores/todo-store';
+
 export default class Todo extends React.Component {
 
   constructor(props) {
