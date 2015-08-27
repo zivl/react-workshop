@@ -1,11 +1,7 @@
-import keyMirror from 'keyMirror';
-
 module.exports = {
-
-  ActionTypes: keyMirror({
-    SAVE_TODO: null,
-    EDIT_TODO: null,
-    DELETE_TODO: null
-  })
-
+  SAVE_TODO: 'SAVE_TODO',
+  EDIT_TODO: 'EDIT_TODO',
+  DELETE_TODO: 'DELETE_TODO',
+  ADD_ITEM: 'ADD_ITEM',
+  REMOVE_ITEM: 'REMOVE_ITEM'
 };

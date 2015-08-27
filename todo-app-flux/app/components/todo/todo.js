@@ -30,7 +30,7 @@ export default class Todo extends React.Component {
     this.setState(this.state);
   }
 
-  saveTodo (todo) {
+  saveTodo(todo) {
     if (!todo.id && this.state.selectedIndex === -1) {
       todo.id = (new Date()).getTime();
       this.state.todoList.push(todo);
@@ -43,26 +43,42 @@ export default class Todo extends React.Component {
     setTimeout(this.refs.todoForm.cancelClick);
   }
 
-  editTodo (index) {
+  editTodo(index) {
     this.state.selectedIndex = index;
     this.setState({
       todo: this.state.todoList[index]
     });
   }
 
-  deleteTodo (index) {
+  deleteTodo(index) {
     this.state.todoList.splice(index, 1);
     this.state.todo = {};
     this.setState(this.state);
   }
 
   render() {
-    return (
-      <div>
-        <TodoForm ref='todoForm' todo={this.state.todo} onSave={this.saveTodo} cancelClick={this.cancelClick} />
-        <hr/>
-        <TodoList todos={this.state.todoList} editClicked={this.editTodo} deleteClicked={this.deleteTodo} />
-      </div>
+    return ( < div >
+      < TodoForm ref = 'todoForm'
+      todo = {
+        this.state.todo
+      }
+      onSave = {
+        this.saveTodo
+      }
+      cancelClick = {
+        this.cancelClick
+      }
+      /> < hr / >
+      < TodoList todos = {
+        this.state.todoList
+      }
+      editClicked = {
+        this.editTodo
+      }
+      deleteClicked = {
+        this.deleteTodo
+      }
+      /> < /div>
     );
   }
 
