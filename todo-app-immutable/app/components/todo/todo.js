@@ -35,25 +35,35 @@ export default class Todo extends React.Component {
     if (!todo.id && this.state.data.get('selectedIndex') === -1) {
       this.setState((previousState) => ({
         data: previousState.data.update('todoList', (list =>
-          list.push(todo))),
-        selectedIndex: -1
+          list.push(todo)))
       }));
     } else {
       this.setState((previousState) => ({
         data: previousState.data.update('todoList', (list =>
-          list.set(previousState.data.selectedIndex, todo))),
-        selectedIndex: -1
+          list.set(previousState.data.get('selectedIndex'), todo)))
       }));
     }
+
+    this.setState((previousState) => ({
+      data: previousState.data.update('selectedIndex', (si =>
+        si = -1))
+    }));
+
     setTimeout(this.refs.todoForm.cancelClick);
   }
 
   editTodo(index) {
-    let data = this.state.data;
+    this.setState(function(previousState) {
+      let dataNewTodo = previousState.data.update('todo', (todo) =>
+        todo.set('name', previousState.data.get('todoList').get(index).name));
 
-    this.setState({
-      todo: data.get('todoList').get(index)
+      let newData = dataNewTodo.update('selectedIndex', (si) => (index));
+      return {
+        data: newData
+      };
+
     });
+    console.log(this.state.data.toJS());
   }
 
   handleChange(event) {
