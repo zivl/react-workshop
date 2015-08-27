@@ -11,17 +11,36 @@ export default class Todo extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      todo: {},
-      todoList: [],
-      selectedIndex: -1
-    };
+    this.self = this;
+
+    this.state = this.getState();
 
     this.saveTodo = this.saveTodo.bind(this);
     this.editTodo = this.editTodo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
     this.cancelClick = this.cancelClick.bind(this);
+    this.onChange = this.onChange.bind(this);
 
+  }
+
+  getState() {
+    return {
+      todoList: TodoStore.getAll(),
+      todo: {},
+      selectedIndex: -1
+    };
+  }
+
+  componentDidMount() {
+    TodoStore.addChangeListener(this.onChange);
+  }
+
+  componentWillUnmount() {
+    TodoStore.removeChangeListener(this.onChange);
+  }
+
+  onChange() {
+    this.setState(this.getState());
   }
 
   cancelClick() {

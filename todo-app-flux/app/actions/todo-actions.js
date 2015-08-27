@@ -1,14 +1,12 @@
 import TodoDispatcher from '../dispatcher/todo-dispatcher';
 import TodoConstants from '../constants/todo-constants';
 
-var TodoActions = {
-  addItem: function(item) {
-    console.log(item);
+export default class TodoActions {
+
+  static addItem(todo) {
     TodoDispatcher.handleViewAction({
       actionType: TodoConstants.ADD_ITEM,
-      item: item
-    })
+      item: todo
+    });
   }
 }
-
-module.exports = TodoActions

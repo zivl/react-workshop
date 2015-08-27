@@ -5,7 +5,6 @@ let Dispatcher = flux.Dispatcher;
 
 var TodoDispatcher = assign(new Dispatcher(), {
   handleViewAction: function(action) {
-    console.log(action);
     this.dispatch({
       source: 'VIEW_ACTION',
       action: action

@@ -27,12 +27,12 @@ export default class TodoForm extends React.Component {
   }
 
   saveClick(event) {
-    TodoActions.addItem('this is the item');
-    // if(this.state.todo.name && this.state.todo.name.length > 0) {
-    //   this.props.onSave(this.state.todo);
-    // } else {
-    //   alert('Please enter todo!!');
-    // }
+    if(this.state.todo.name && this.state.todo.name.length > 0) {
+      TodoActions.addItem(this.state.todo);
+      // this.props.onSave(this.state.todo);
+    } else {
+      alert('Please enter todo!!');
+    }
   }
 
   cancelClick(event) {
@@ -47,7 +47,7 @@ export default class TodoForm extends React.Component {
       </div>
       <div className = "col-sm-2 pull-right">
         <button className = 'btn btn-success btn-sm' onClick = {this.saveClick} > Save < /button>
-        & nbsp; & nbsp;
+        &nbsp; &nbsp;
         <button className ='btn btn-danger btn-sm' onClick = {this.cancelClick} > Cancel < /button>
       < /div>
     < /div>
