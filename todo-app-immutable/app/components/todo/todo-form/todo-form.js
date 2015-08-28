@@ -29,7 +29,7 @@ export default class TodoForm extends React.Component {
   render() {
     return (
       <div className='row'>
-        <div className="col-sm-10">
+        <div className="col-sm-9">
           <input
             type="text"
             className="form-control"
@@ -38,7 +38,7 @@ export default class TodoForm extends React.Component {
             onChange={this.handleChange}
           />
         </div>
-        <div className="col-sm-2 pull-right">
+        <div className="col-sm-3 pull-right">
           <button
             className='btn btn-success btn-sm'
             onClick={this.saveClick}>Save
