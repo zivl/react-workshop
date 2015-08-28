@@ -26,44 +26,52 @@ export default class Todo extends React.Component {
   }
 
   cancelClick() {
-    this.state.selectedIndex = -1;
-    this.state.todo = {};
-    this.setState(this.state);
+    //console.log('before click ', this.state.data.toJS());
+    this.setState((previousState) => ({
+      data: previousState.data.merge({
+        selectedIndex: -1,
+        todo: {}
+      })
+    }));
+
+    console.log('cancel');
+    //console.log('after click ', this.state.data.toJS());
+  }
+
+  isTodoItemSelectedToEdit(todo) {
+    return (this.state.data.get('selectedIndex') !== -1);
   }
 
   saveTodo(todo) {
-    if (!todo.id && this.state.data.get('selectedIndex') === -1) {
-      this.setState((previousState) => ({
-        data: previousState.data.update('todoList', (list =>
-          list.push(todo)))
-      }));
-    } else {
+    if(this.isTodoItemSelectedToEdit(todo)) {
       this.setState((previousState) => ({
         data: previousState.data.update('todoList', (list =>
           list.set(previousState.data.get('selectedIndex'), todo)))
       }));
+    } else {
+      this.setState((previousState) => ({
+        data: previousState.data.update('todoList', (list =>
+          list.push(todo)))
+      }));
     }
-
-    this.setState((previousState) => ({
-      data: previousState.data.update('selectedIndex', (si =>
-        si = -1))
-    }));
 
     setTimeout(this.refs.todoForm.cancelClick);
   }
 
   editTodo(index) {
+    console.log('before edit', this.state.data.toJS());
     this.setState(function(previousState) {
-      let dataNewTodo = previousState.data.update('todo', (todo) =>
-        todo.set('name', previousState.data.get('todoList').get(index).name));
-
-      let newData = dataNewTodo.update('selectedIndex', (si) => (index));
+      let editingTodoName = previousState.data.get('todoList').get(index).name;
       return {
-        data: newData
+        data: previousState.data.merge({
+          todo: previousState.data.get('todo').set('name', editingTodoName),
+          selectedIndex: index
+        })
       };
 
     });
-    console.log(this.state.data.toJS());
+
+    console.log('after edit', this.state.data.toJS());
   }
 
   handleChange(event) {
@@ -102,5 +110,4 @@ export default class Todo extends React.Component {
       </div>
     );
   }
-
 }
