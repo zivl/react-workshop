@@ -1,4 +1,5 @@
 import React from "react";
+import TodoActions from '../../../actions/todo-actions';
 
 export default class TodoForm extends React.Component {
 
@@ -25,36 +26,36 @@ export default class TodoForm extends React.Component {
     this.setState(this.state);
   }
 
-  saveClick (event) {
+  saveClick(event) {
     if(this.state.todo.name && this.state.todo.name.length > 0) {
-      this.props.onSave(this.state.todo);
+      TodoActions.addItem(this.state.todo);
+      // this.props.onSave(this.state.todo);
     } else {
       alert('Please enter todo!!');
     }
   }
 
-  cancelClick (event) {
+  cancelClick(event) {
     this.props.cancelClick();
   }
 
   render() {
-      var name = this.state.todo.name;
-      return (
-        <div className='row'>
-          <div className="col-sm-10">
-            <input type="text" className="form-control" placeholder='Todo' value={name} onChange={this.handleChange} />
-          </div>
-          <div className="col-sm-2 pull-right">
-            <button className='btn btn-success btn-sm' onClick={this.saveClick}>Save</button>
-            &nbsp;&nbsp;
-            <button className='btn btn-danger btn-sm' onClick={this.cancelClick}>Cancel</button>
-          </div>
-        </div>
+    var name = this.state.todo.name;
+    return ( <div className='row'>
+      <div className="col-sm-10">
+        <input type="text" className = "form-control" placeholder = 'Todo' value = {name} onChange = {this.handleChange}/>
+      </div>
+      <div className = "col-sm-2 pull-right">
+        <button className = 'btn btn-success btn-sm' onClick = {this.saveClick} > Save < /button>
+        &nbsp; &nbsp;
+        <button className ='btn btn-danger btn-sm' onClick = {this.cancelClick} > Cancel < /button>
+      < /div>
+    < /div>
     );
   }
 }
 
 TodoForm.propTypes = {
- todo: React.PropTypes.object,
- cancelClick: React.PropTypes.func.isRequired,
+  todo: React.PropTypes.object,
+  cancelClick: React.PropTypes.func.isRequired,
 };
