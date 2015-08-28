@@ -18,24 +18,31 @@ export default class Todo extends React.Component {
       })
     };
 
+    this.undoStack = [];
     this.saveTodo = this.saveTodo.bind(this);
     this.editTodo = this.editTodo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
     this.cancelClick = this.cancelClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleUndo = this.handleUndo.bind(this);
+  }
+
+
+  handleUndo() {
+    if(this.undoStack.length) {
+      this.setState({
+        data: this.undoStack.pop()
+      });
+    }
   }
 
   cancelClick() {
-    //console.log('before click ', this.state.data.toJS());
     this.setState((previousState) => ({
       data: previousState.data.merge({
         selectedIndex: -1,
         todo: {}
       })
     }));
-
-    console.log('cancel');
-    //console.log('after click ', this.state.data.toJS());
   }
 
   isTodoItemSelectedToEdit(todo) {
@@ -43,6 +50,8 @@ export default class Todo extends React.Component {
   }
 
   saveTodo(todo) {
+    this.undoStack.push(this.state.data);
+
     if(this.isTodoItemSelectedToEdit(todo)) {
       this.setState((previousState) => ({
         data: previousState.data.update('todoList', (list =>
@@ -59,7 +68,8 @@ export default class Todo extends React.Component {
   }
 
   editTodo(index) {
-    console.log('before edit', this.state.data.toJS());
+    this.undoStack.push(this.state.data);
+
     this.setState(function(previousState) {
       let editingTodoName = previousState.data.get('todoList').get(index).name;
       return {
@@ -70,12 +80,12 @@ export default class Todo extends React.Component {
       };
 
     });
-
-    console.log('after edit', this.state.data.toJS());
   }
 
   handleChange(event) {
     let todoEntry = event.target.value;
+
+    this.undoStack.push(this.state.data);
 
     this.setState((previousState) => ({
       data: previousState.data.update('todo', (todo) =>
@@ -84,6 +94,8 @@ export default class Todo extends React.Component {
   }
 
   deleteTodo(index) {
+    this.undoStack.push(this.state.data);
+
     this.setState((previousState) => ({
       data: previousState.data.update('todoList', function(todoList) {
         return todoList.delete(index);
@@ -100,6 +112,7 @@ export default class Todo extends React.Component {
           onSave={this.saveTodo}
           cancelClick={this.cancelClick}
           handleChange={this.handleChange}
+          handleUndo={this.handleUndo}
         />
         <hr/>
         <TodoList

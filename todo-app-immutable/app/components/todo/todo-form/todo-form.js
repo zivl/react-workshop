@@ -55,7 +55,7 @@ export default class TodoForm extends React.Component {
 
           <button
             className='btn btn-default btn-sm'
-            onClick={this.undoClick}>UNDO
+            onClick={this.props.handleUndo}>UNDO
           </button>
         </div>
       </div>
