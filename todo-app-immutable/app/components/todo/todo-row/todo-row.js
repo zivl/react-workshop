@@ -20,7 +20,7 @@ export default class TodoRow extends React.Component {
   render() {
     return (
       <tr>
-        <td>{this.props.todo.name}</td>
+        <td>{this.props.todo.get('name')}</td>
         <td>
           <button
             className='btn btn-primary btn-sm'

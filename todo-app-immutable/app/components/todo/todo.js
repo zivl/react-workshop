@@ -19,19 +19,30 @@ export default class Todo extends React.Component {
     };
 
     this.undoStack = [];
+    this.redoStack = [];
     this.saveTodo = this.saveTodo.bind(this);
     this.editTodo = this.editTodo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
     this.cancelClick = this.cancelClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleUndo = this.handleUndo.bind(this);
+    this.handleRedo = this.handleRedo.bind(this);
   }
 
 
   handleUndo() {
     if(this.undoStack.length) {
+      this.redoStack.push(this.state.data);
       this.setState({
         data: this.undoStack.pop()
+      });
+    }
+  }
+
+  handleRedo() {
+    if(this.redoStack.length) {
+      this.setState({
+        data: this.redoStack.pop()
       });
     }
   }
@@ -45,14 +56,14 @@ export default class Todo extends React.Component {
     }));
   }
 
-  isTodoItemSelectedToEdit(todo) {
+  isTodoItemSelectedToEdit() {
     return (this.state.data.get('selectedIndex') !== -1);
   }
 
   saveTodo(todo) {
     this.undoStack.push(this.state.data);
 
-    if(this.isTodoItemSelectedToEdit(todo)) {
+    if(this.isTodoItemSelectedToEdit()) {
       this.setState((previousState) => ({
         data: previousState.data.update('todoList', (list =>
           list.set(previousState.data.get('selectedIndex'), todo)))
@@ -71,10 +82,9 @@ export default class Todo extends React.Component {
     this.undoStack.push(this.state.data);
 
     this.setState(function(previousState) {
-      let editingTodoName = previousState.data.get('todoList').get(index).name;
       return {
         data: previousState.data.merge({
-          todo: previousState.data.get('todo').set('name', editingTodoName),
+          todo: previousState.data.get('todoList').get(index),
           selectedIndex: index
         })
       };
@@ -108,11 +118,12 @@ export default class Todo extends React.Component {
       <div>
         <TodoForm
           ref='todoForm'
-          todo={this.state.data.get('todo').toJS()}
+          todo={this.state.data.get('todo')}
           onSave={this.saveTodo}
           cancelClick={this.cancelClick}
           handleChange={this.handleChange}
           handleUndo={this.handleUndo}
+          handleRedo={this.handleRedo}
         />
         <hr/>
         <TodoList

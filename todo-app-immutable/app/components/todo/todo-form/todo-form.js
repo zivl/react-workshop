@@ -15,7 +15,7 @@ export default class TodoForm extends React.Component {
   }
 
   saveClick (event) {
-    if(this.props.todo.name && this.props.todo.name.length > 0) {
+    if(this.props.todo.get('name') && this.props.todo.get('name').length > 0) {
       this.props.onSave(this.props.todo);
     } else {
       alert('Please enter todo!!');
@@ -29,16 +29,16 @@ export default class TodoForm extends React.Component {
   render() {
     return (
       <div className='row'>
-        <div className="col-sm-9">
+        <div className="col-sm-8">
           <input
             type="text"
             className="form-control"
             placeholder='Todo'
-            value={this.props.todo.name}
+            value={this.props.todo.get('name')}
             onChange={this.handleChange}
           />
         </div>
-        <div className="col-sm-3 pull-right">
+        <div className="col-sm-4 pull-right">
           <button
             className='btn btn-success btn-sm'
             onClick={this.saveClick}>Save
@@ -55,7 +55,14 @@ export default class TodoForm extends React.Component {
 
           <button
             className='btn btn-default btn-sm'
-            onClick={this.props.handleUndo}>UNDO
+            onClick={this.props.handleUndo}> &#x21a9; Undo
+          </button>
+
+          &nbsp;&nbsp;
+
+          <button
+            className='btn btn-default btn-sm'
+            onClick={this.props.handleRedo}>Redo &#x21aa;
           </button>
         </div>
       </div>

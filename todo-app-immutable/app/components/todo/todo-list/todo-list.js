@@ -5,33 +5,11 @@ export default class TodoList extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.editClicked = this.editClicked.bind(this);
-    this.deleteClicked = this.deleteClicked.bind(this);
-  }
-
-  editClicked(todo) {
-    this.props.editClicked(todo);
-  }
-
-  deleteClicked(todo) {
-    this.props.deleteClicked(todo);
   }
 
   render() {
     var rows = [];
-    var self = this;
-    this.props.todos.forEach(function(todo, index) {
-      rows.push(
-        <TodoRow
-          todo={todo}
-          key={todo.id}
-          index={index}
-          editClicked={self.editClicked}
-          deleteClicked={self.deleteClicked}
-        />
-      );
-    });
+    var _this = this;
 
     return (
       <table className="table table-bordered">
@@ -41,7 +19,17 @@ export default class TodoList extends React.Component {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>{rows}</tbody>
+        <tbody>
+          {_this.props.todos.map((todo, index) =>
+            <TodoRow
+              todo={todo}
+              key={index}
+              index={index}
+              editClicked={_this.props.editClicked}
+              deleteClicked={_this.props.deleteClicked}
+            />
+          )}
+        </tbody>
       </table>
     );
   }
