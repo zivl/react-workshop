@@ -1,36 +1,35 @@
-var path = require('path');
+function getEntrySources(sources) {
+  if (process.env.NODE_ENV !== 'production') {
+    sources.push('webpack-dev-server/client?http://localhost:8080');
+    sources.push('webpack/hot/only-dev-server');
+  }
+
+  return sources;
+}
 
 module.exports = {
-  context: path.resolve(__dirname) + "/app",
-  target: "web",
-  debug: true,
-  resolve: {
-    extensions: ['', '.jsx', '.es6', '.js', '.scss']
-  },
-  devtool: "source-map",
-
+  devtool: process.env.NODE_ENV !== 'production' ? 'eval-source-map' : '',
   entry: {
-    javascript: "./app.js",
-    html: "./index.html"
+    bundle: getEntrySources([
+      './app/app.js'
+    ])
   },
-
   output: {
-    filename: "app.js",
-    path: path.resolve(__dirname) + "/dist",
+    publicPath: 'http://localhost:8080/',
+    filename: 'dist/[name].js'
   },
-
-
   module: {
+    preLoaders: [{
+      test: /\.js$/,
+      loader: 'source-map-loader'
+    }],
     loaders: [{
       test: /\.js$/,
-      exclude: /node_modules/,
-      loaders: ["react-hot", "babel-loader"],
-    }, {
-      test: /\.html$/,
-      loader: "file?name=[name].[ext]",
+      loaders: ['react-hot', 'babel-loader'],
+      exclude: /node_modules/
     }, {
       test: /\.scss$/,
-      loader: 'style!css!sass'
-    }],
+      loaders: ['style', 'css', 'sass']
+    }]
   }
-}
+};

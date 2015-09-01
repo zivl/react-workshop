@@ -6,22 +6,19 @@ import TodoForm from "./todo-form";
 describe('todo-form', function () {
 
   let _component;
-  let _todo;
-  let _cancelClick;
+  let _onSave;
 
   beforeEach(function() {
-    _todo = {
-      name: 'todo',
-      id: 1
-    };
-
-    _cancelClick = () => 'cancelClick';
-
-    _component = TestUtils.renderIntoDocument( <TodoForm todo={_todo} cancelClick={_cancelClick} /> );
+    _onSave = () => 'saveClick';
+    _component = TestUtils.renderIntoDocument( <TodoForm onSave={_onSave} /> );
   });
 
   it('renders without problems', function () {
     expect(_component).toExist();
+  });
+
+  it('should contain _saveTodo', function () {
+    expect(_component.saveTodo).toExist();
   });
 
 });
