@@ -1,4 +1,4 @@
-## Part 1: Getting started with ReactJS
+## Getting started with ReactJS
 
 
 ### What is ReactJS?
@@ -219,7 +219,7 @@ Since we don't want to have all our components living in the same file it make s
 
 Since we are using babel and have the benfit to use ES6 it makes sense to move away from ```require``` and towards ES6 modules.
 
-In the case about, we could create a HelloWorld.js file, add our compoent class and we ensure to export the module...
+In the case about, we could create a HelloWorld.js file, add our component class and export the module:
 
 
 ```js
