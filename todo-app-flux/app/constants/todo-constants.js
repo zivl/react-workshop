@@ -1,7 +1,0 @@
-module.exports = {
-  SAVE_TODO: 'SAVE_TODO',
-  EDIT_TODO: 'EDIT_TODO',
-  DELETE_TODO: 'DELETE_TODO',
-  ADD_ITEM: 'ADD_ITEM',
-  REMOVE_ITEM: 'REMOVE_ITEM'
-};

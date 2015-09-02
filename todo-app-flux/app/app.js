@@ -1,14 +1,5 @@
-// import 'bootstrap-sass';
-// import './app.scss';
+import React from 'react';
+import Todo from './components/todo/todo';
+import './components/todo/todo.scss';
 
-import React from "react";
-import Header from "./components/header/header";
-import Todo from "./components/todo/todo";
-
-React.render(
-  <div>
-    <Header title="Todo App"/>
-    <Todo />
-  </div>,
-  document.getElementById('main')
-);
+React.render(<Todo/>, document.getElementById('app'));
