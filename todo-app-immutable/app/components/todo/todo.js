@@ -22,7 +22,7 @@ export default class Todo extends React.Component {
     this._saveTodo = this._saveTodo.bind(this);
     this._deleteTodo = this._deleteTodo.bind(this);
     this._completeTodo = this._completeTodo.bind(this);
-    this._traceHistory = this._traceHistory.bind(this);
+    this._traverseHistory = this._traverseHistory.bind(this);
     this._recordHistory = this._recordHistory.bind(this);
   }
 
@@ -34,7 +34,7 @@ export default class Todo extends React.Component {
       <div className='app'>
 
         <h2>{children}</h2>
-        <TodoHistory traceHistory={this._traceHistory} />
+        <TodoHistory traverseHistory={this._traverseHistory} />
         <TodoList todos={todoList}
                   onDelete={this._deleteTodo}
                   onComplete={this._completeTodo} />
@@ -49,7 +49,7 @@ export default class Todo extends React.Component {
       historyList.push(this.state.data));
   }
 
-  _traceHistory(direction) {
+  _traverseHistory(direction) {
     var { data } = this.state;
     var { history } = this;
 

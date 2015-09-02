@@ -50,36 +50,36 @@ describe('todo', function () {
     expect(_component.state.data.get('todoList').get(0).get('item')).toBe('test 2');
   });
 
-  it('_traceHistory(\'backward\') should return to the previous state, after deleting one todo item', function () {
+  it('_traverseHistory(\'backward\') should return to the previous state, after deleting one todo item', function () {
     expect(_component.state.data.get('todoList').size).toBe(2);
     _component._deleteTodo(0, mock);
-    _component._traceHistory('backward');
+    _component._traverseHistory('backward');
     expect(_component.state.data.get('todoList').size).toBe(2);
   });
 
-  it('_traceHistory(\'backward\') should return to the state that was before adding new todo', function () {
+  it('_traverseHistory(\'backward\') should return to the state that was before adding new todo', function () {
     _component._saveTodo('test 3', mock);
-    _component._traceHistory('backward');
+    _component._traverseHistory('backward');
     expect(_component.state.data.get('todoList').last().get('item')).toBe('test 2');
   });
 
-  it('_traceHistory(\'forward\') after _traceHistory(\'backward\') should have todoList of ' +
+  it('_traverseHistory(\'forward\') after _traverseHistory(\'backward\') should have todoList of ' +
       ' the same size as the one before deleting one todo item', function () {
     expect(_component.state.data.get('todoList').size).toBe(2);
     _component._deleteTodo(0, mock);
     expect(_component.state.data.get('todoList').size).toBe(1);
-    _component._traceHistory('backward');
+    _component._traverseHistory('backward');
     expect(_component.state.data.get('todoList').size).toBe(2);
-    _component._traceHistory('forward');
+    _component._traverseHistory('forward');
     expect(_component.state.data.get('todoList').size).toBe(1);
   });
 
-  it('rtraceHistory(\'forward\') after _traceHistory(\'backward\') should have the same last todo item '+
+  it('_traverseHistory(\'forward\') after _traverseHistory(\'backward\') should have the same last todo item '+
       'as the one that was in the todoList before one new item was added', function () {
     _component._saveTodo('test 3', mock);
-    _component._traceHistory('backward');
+    _component._traverseHistory('backward');
     expect(_component.state.data.get('todoList').last().get('item')).toBe('test 2');
-    _component._traceHistory('forward');
+    _component._traverseHistory('forward');
     expect(_component.state.data.get('todoList').last().get('item')).toBe('test 3');
   });
 

@@ -6,11 +6,11 @@ import TodoHistory from "./todo-history";
 describe('todo-history', function () {
 
   let _component;
-  let _traceHistory;
+  let _traverseHistory;
 
   beforeEach(function() {
-    _traceHistory = () => 'traceHistory()';
-    _component = TestUtils.renderIntoDocument( <TodoHistory traceHistory={_traceHistory} /> );
+    _traverseHistory = () => 'traverseHistory()';
+    _component = TestUtils.renderIntoDocument( <TodoHistory traverseHistory={_traverseHistory} /> );
   });
 
   it('renders without problems', function () {

@@ -19,16 +19,16 @@ export default class TodoHistory extends React.Component {
   }
 
   _goBackward() {
-    var { traceHistory } = this.props;
-    traceHistory('backward');
+    var { traverseHistory } = this.props;
+    traverseHistory('backward');
   }
 
   _goForward() {
-    var { traceHistory } = this.props;
-    traceHistory('forward');
+    var { traverseHistory } = this.props;
+    traverseHistory('forward');
   }
 }
 
 TodoHistory.propTypes = {
-  traceHistory: React.PropTypes.func.isRequired,
+  traverseHistory: React.PropTypes.func.isRequired,
 };
