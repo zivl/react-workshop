@@ -1,4 +1,5 @@
 import React from 'react';
+import {List} from 'immutable';
 
 export default class TodoList extends React.Component {
 
@@ -17,7 +18,7 @@ export default class TodoList extends React.Component {
       );
     });
 
-    if (todos.length <= 0) {
+    if (todos.size <= 0) {
       return (<div>Nothing Here!</div>);
     }
 
@@ -30,7 +31,7 @@ export default class TodoList extends React.Component {
 }
 
 TodoList.propTypes = {
-  todos: React.PropTypes.array,
+  todos: React.PropTypes.instanceOf(List),
   onDelete: React.PropTypes.func.isRequired,
   onComplete: React.PropTypes.func.isRequired,
 };

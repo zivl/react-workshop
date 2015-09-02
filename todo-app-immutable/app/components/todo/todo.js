@@ -1,5 +1,5 @@
 import React from 'react';
-import {List, Map} from 'immutable';
+import { List, Map } from 'immutable';
 import TodoList from './todo-list/todo-list';
 import TodoForm from './todo-form/todo-form';
 import TodoHistory from './todo-history/todo-history';

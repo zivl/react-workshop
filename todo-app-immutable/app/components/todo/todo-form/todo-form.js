@@ -1,4 +1,5 @@
 import React from 'react';
+import { List } from 'immutable';
 
 export default class TodoForm extends React.Component {
 
@@ -37,6 +38,6 @@ export default class TodoForm extends React.Component {
 }
 
 TodoForm.propTypes = {
-  todos: React.PropTypes.array,
+  todos: React.PropTypes.instanceOf(List),
   onSave: React.PropTypes.func.isRequired
 };

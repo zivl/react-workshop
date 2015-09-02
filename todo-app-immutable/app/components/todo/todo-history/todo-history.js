@@ -28,3 +28,7 @@ export default class TodoHistory extends React.Component {
     traceHistory('forward');
   }
 }
+
+TodoHistory.propTypes = {
+  traceHistory: React.PropTypes.func.isRequired,
+};
