@@ -47,6 +47,7 @@ export default class Todo extends React.Component {
   _recordHistory() {
     this.history = this.history.update('backward', (historyList) =>
       historyList.push(this.state.data));
+    console.log(this.history.toJS());
   }
 
   _traceHistory(direction) {
@@ -74,34 +75,34 @@ export default class Todo extends React.Component {
 
     this.setState((previousState) => ({
       data: previousState.data.update('todoList', (todoList) =>
-        (todoList.push({
+        (todoList.push(Map({
           item: todo,
           selected: false
-        })
+        }))
       ))
     }))
   }
 
-  _completeTodo(completedTodo) {
+  _completeTodo(completedTodoIndex) {
     this._recordHistory();
 
     this.setState((previousState) => ({
       data: previousState.data.update('todoList', (todoList) =>
-        todoList.map((todo) => {
-          if (completedTodo === todo) {
-            todo.selected = !todo.selected;
+        todoList.map((todo, index) => {
+          if(completedTodoIndex === index) {
+            return todo.set('selected', !todo.get('selected'));
           }
           return todo;
         }))
     }))
   }
 
-  _deleteTodo(todo, todos) {
+  _deleteTodo(todoIndex, todos) {
     this._recordHistory();
 
     this.setState((previousState) => ({
-      data: previousState.data.update('todoList', () =>
-        todos.filter(value => (value !== todo)))
+      data: previousState.data.update('todoList', (todoList) =>
+        todoList.delete(todoIndex))
     }))
   }
 }

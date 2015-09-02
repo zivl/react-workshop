@@ -9,9 +9,9 @@ export default class TodoList extends React.Component {
     var rows = todos.map((value, index) => {
       return (
         <li key={index}>
-          <button onClick={onDelete.bind(null, value, todos)}>X</button>
-          <label className={value.selected ? 'todo-item-completed' : 'todo-item'}
-                 onClick={onComplete.bind(null, value)}>{value.item}
+          <button onClick={onDelete.bind(null, index, todos)}>X</button>
+          <label className={value.get('selected') ? 'todo-item-completed' : 'todo-item'}
+                 onClick={onComplete.bind(null, index)}>{value.get('item')}
           </label>
 
         </li>
