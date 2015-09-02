@@ -47,7 +47,6 @@ export default class Todo extends React.Component {
   _recordHistory() {
     this.history = this.history.update('backward', (historyList) =>
       historyList.push(this.state.data));
-    console.log(this.history.toJS());
   }
 
   _traceHistory(direction) {
