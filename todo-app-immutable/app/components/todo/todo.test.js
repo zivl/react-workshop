@@ -1,16 +1,17 @@
 import React from 'react';
+import Immutable from 'Immutable';
 import TestUtils from 'react/lib/ReactTestUtils';
 import expect from 'expect';
 import Todo from "./todo";
 
 describe('todo', function () {
-  var mock = [{
+  var mock = Immutable.fromJS([{
     "item": "test 1",
     "selected": false
   }, {
     "item": "test 2",
     "selected": false
-  }];
+  }]);
 
   let _component;
 

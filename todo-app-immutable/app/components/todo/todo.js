@@ -73,8 +73,8 @@ export default class Todo extends React.Component {
   _saveTodo(todo, todos) {
     this._recordHistory();
 
-    this.setState((previousState) => ({
-      data: previousState.data.update('todoList', (todoList) =>
+    this.setState(({data}) => ({
+      data: data.update('todoList', (todoList) =>
         (todoList.push(Map({
           item: todo,
           selected: false
@@ -86,13 +86,11 @@ export default class Todo extends React.Component {
   _completeTodo(completedTodoIndex) {
     this._recordHistory();
 
-    this.setState((previousState) => ({
-      data: previousState.data.update('todoList', (todoList) =>
+    this.setState(({data}) => ({
+      data: data.update('todoList', (todoList) =>
         todoList.map((todo, index) => {
-          if(completedTodoIndex === index) {
-            return todo.set('selected', !todo.get('selected'));
-          }
-          return todo;
+          return (completedTodoIndex === index) ?
+            todo.set('selected', !todo.get('selected')) : todo;
         }))
     }))
   }
@@ -100,8 +98,8 @@ export default class Todo extends React.Component {
   _deleteTodo(todoIndex, todos) {
     this._recordHistory();
 
-    this.setState((previousState) => ({
-      data: previousState.data.update('todoList', (todoList) =>
+    this.setState(({data}) => ({
+      data: data.update('todoList', (todoList) =>
         todoList.delete(todoIndex))
     }))
   }
