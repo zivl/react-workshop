@@ -130,3 +130,51 @@ console.log(numbers.toJS());        // 1, 2, 3, 4, 5
 console.log(numbersUpdated.toJS()); // 1, 2, 3, 4, 5, 6
 ```
 
+It is important to note that JavaScript array also has `push` and `pop` but since they mutate arrays the return value is the element that was pushed or poped:
+```js
+var arr = [1, 2, 3];
+var n1 = arr.push(4);
+
+console.log(n1); // 4
+
+var n2 = arr.pop();
+
+console.log(n2); // 4
+```
+
+```js
+ _saveTodo(todo) {
+    this._recordHistory();
+
+    this.setState(({data}) => ({
+      data: data.update('todoList', (todoList) =>
+        (todoList.push(Map({
+          item: todo,
+          selected: false
+        }))
+      ))
+    }));
+  }
+
+  _completeTodo(completedTodoIndex) {
+    this._recordHistory();
+
+    this.setState(({data}) => ({
+      data: data.update('todoList', (todoList) =>
+        todoList.map((todo, index) => {
+          return (completedTodoIndex === index) ?
+            todo.set('selected', !todo.get('selected')) : todo;
+        }))
+    }));
+  }
+
+  _deleteTodo(todoIndex) {
+    this._recordHistory();
+
+    this.setState(({data}) => ({
+      data: data.update('todoList', (todoList) =>
+        todoList.delete(todoIndex))
+    }));
+  }
+}
+```
