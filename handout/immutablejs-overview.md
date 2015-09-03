@@ -161,6 +161,9 @@ var list3 = list2.pop();
 console.log(list3.toArray()); // [1, 2, 3]
 ```
 
+### Todo app with immutable state
+
+Add a todo item to our immutable state by updating our `data` `Map` and pushing the `todo` item to the `todoList` `List`.
 ```js
  _saveTodo(todo) {
     this._recordHistory();
@@ -174,7 +177,9 @@ console.log(list3.toArray()); // [1, 2, 3]
       ))
     }));
   }
+```
 
+```js
   _completeTodo(completedTodoIndex) {
     this._recordHistory();
 
@@ -186,7 +191,9 @@ console.log(list3.toArray()); // [1, 2, 3]
         }))
     }));
   }
+```
 
+```js
   _deleteTodo(todoIndex) {
     this._recordHistory();
 
