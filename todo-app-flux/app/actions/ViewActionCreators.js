@@ -3,27 +3,27 @@ var AppDispatcher = require('../dispatcher/AppDispatcher.js');
 
 
 var ViewActionCreators = {
-  loadTodos: function () {
+  loadTodos: () => {
     AppDispatcher.handleViewAction({
       type: ActionTypes.LOAD_TODOS
     });
   },
 
-  toggleTodo: function (todo) {
+  toggleTodo: (todo) => {
     AppDispatcher.handleViewAction({
       type: ActionTypes.TODO_TOGGLED,
       todo: todo
     });
   },
 
-  saveTodo: function (todo) {
+  saveTodo: (todo) => {
     AppDispatcher.handleViewAction({
       type: ActionTypes.TODO_ADDED,
       todo: todo
     });
   },
 
-  deleteTodo: function (todo) {
+  deleteTodo: (todo) => {
     AppDispatcher.handleViewAction({
       type: ActionTypes.TODO_DELETED,
       todo: todo

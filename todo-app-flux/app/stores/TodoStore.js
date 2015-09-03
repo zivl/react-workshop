@@ -7,7 +7,13 @@ var events = new EventEmitter();
 var CHANGE_EVENT = 'CHANGE';
 
 var state = {
-  todoList: []
+  todoList: [{
+    item: 'Learn React',
+    selected: false
+  }, {
+    item: 'Learn Flux',
+    selected: false
+  }]
 };
 
 function setState(newState) {
@@ -16,16 +22,26 @@ function setState(newState) {
 }
 
 var TodoStore = {
-  addChangeListener: function (fn) {
+  addChangeListener: (fn) => {
     events.addListener(CHANGE_EVENT, fn);
   },
 
-  removeChangeListener: function (fn) {
+  removeChangeListener: (fn) => {
     events.removeListener(CHANGE_EVENT, fn);
   },
 
-  getState: function () {
+  getState: () => {
     return state;
+  },
+
+  getTodosRemaining: () => {
+    return state.todoList.reduce((acc, i) => {
+      if (!i.selected) {
+        acc += 1;
+      }
+
+      return acc;
+    }, 0);
   }
 };
 
