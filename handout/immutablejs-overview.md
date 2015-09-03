@@ -164,17 +164,17 @@ console.log(list3.toArray()); // [1, 2, 3]
 ### Map
 
 ```js
-import { Map } from 'immutable';
-
-let person1 = Map.fromJS({
+let person1 = Map({
   name: 'John',
   age: '29',
   gender: 'male',
   friends: List()
 });
 
-let person2 = person2.update('name', (name) =>
-  name + ' Doe');
+let person2 = person1.update('name', (name) => name + ' Doe');
+
+console.log(person1.get('name')); // John
+console.log(person2.get('name')); // John Doe
 ```
 
 ### Todo app with immutable state
