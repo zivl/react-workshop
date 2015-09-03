@@ -113,3 +113,20 @@ It provides the following data structures
 - OrderedSet
 - Record
 
+### List
+We can use it as an **arra** but it behaves differently as we are going to see that shortly. List exposes some usefult methods such as `push`, `pop`, `set`, `delete`. For full domumentation you can check the [documentataion from Facebook](https://facebook.github.io/immutable-js/docs/#/List)
+
+Here are some examples of how we can use List:
+```js
+// in ES6
+import { List } from 'immutable';
+
+let numbers = List.of(1, 2, 3, 4, 5);
+
+let numbersUpdated = numbers.push(6); // 1, 2, 3, 4, 5, 6
+
+// We can convert the List to JS array
+console.log(numbers.toJS());        // 1, 2, 3, 4, 5
+console.log(numbersUpdated.toJS()); // 1, 2, 3, 4, 5, 6
+```
+
