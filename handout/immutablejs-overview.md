@@ -158,6 +158,7 @@ console.log(list2.toArray()); // [1, 2, 3, 4]
 var list3 = list2.pop();
 
 console.log(list3.toArray()); // [1, 2, 3]
+```
 
 
 ```js
