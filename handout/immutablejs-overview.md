@@ -161,6 +161,22 @@ var list3 = list2.pop();
 console.log(list3.toArray()); // [1, 2, 3]
 ```
 
+### Map
+
+```js
+import { Map } from 'immutable';
+
+let person1 = Map.fromJS({
+  name: 'John',
+  age: '29',
+  gender: 'male',
+  friends: List()
+});
+
+let person2 = person2.update('name', (name) =>
+  name + ' Doe');
+```
+
 ### Todo app with immutable state
 
 We can't make `this.state` *immutable* but it should be treated as such. However, in order to enforce immutable state we can augment `this.state` with a `Map` which in our case is `data`.
