@@ -134,7 +134,8 @@ console.log(numbersUpdated.toJS()); // 1, 2, 3, 4, 5, 6
 
 ---
 
-It is important to note that JavaScript array also has `push` and `pop` but since they mutate arrays the return value is the element that was pushed or poped:
+It is important to distinquish the behaviour of `push` and `pop` between JS `Array` and `List`:
+
 ```js
 var arr = [1, 2, 3];
 var n1 = arr.push(4);
