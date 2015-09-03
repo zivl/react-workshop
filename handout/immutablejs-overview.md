@@ -137,7 +137,7 @@ console.log(numbersUpdated.toJS()); // 1, 2, 3, 4, 5, 6
 
 It is important to distinquish the behaviour of `push` and `pop` between JS `Array` and `List`:
 
-In regular **javascript** `Array`, `push` and `pop` returns the element that was pushed/popped.
+In regular **javascript** `Array`, `push` and `pop` return the element that was pushed/popped.
 ```js
 var arr = [1, 2, 3];
 var n1 = arr.push(4);
@@ -149,7 +149,7 @@ var n2 = arr.pop();
 console.log(n2); // 4
 ```
 
-In `List` `push` and `pop` returns the new mutated list.
+In `List` `push` and `pop` return the new mutated list.
 ```js
 var list1 = List.of(1, 2, 3);
 var list2 = list1.push(4);
