@@ -131,6 +131,7 @@ console.log(numbersUpdated.toJS()); // 1, 2, 3, 4, 5, 6
 ```
 ---
 **Note:** We can't just `console.log(numbers)` since `numbers` is not a an array. We can however use the `toJS()` method to convert any Immutable data structure into a JS equivalent, as in our case that would be a `List` to an `array`. Also, we can use the `toArray()` method.
+
 ---
 
 It is important to note that JavaScript array also has `push` and `pop` but since they mutate arrays the return value is the element that was pushed or poped:
