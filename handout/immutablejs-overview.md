@@ -51,10 +51,11 @@ Also, number values do not change:
 var num1 = 12;
 var num2 = num1 + 3;
 
+
 console.log(num1); // num1 is still 12
 console.log(num2); // num2 is the new value 15
 
-num1 += 4;         // num1 now points to the new value, 
+num1 += 4;         // num1 now points to the new value,
                    //   we just chose not to save it's previous value
 
 console.log(num1); // 16
@@ -103,9 +104,9 @@ In fact **ImmutableJS** takes adventage of **structural sharing** which is imple
 
 ### ImmutableJS API
 ImmutableJS is a library which is inspired by the lack of **persistent** data structures and the difficuly of tracking mutation and maintaining state.
-It provides the following data structures 
+It provides the following data structures
 
-- List 
+- List
 - Stack
 - Map
 - OrderedMap
@@ -137,6 +138,7 @@ console.log(numbersUpdated.toJS()); // 1, 2, 3, 4, 5, 6
 It is important to distinquish the behaviour of `push` and `pop` between JS `Array` and `List`:
 
 ```js
+// Regular javascript Array
 var arr = [1, 2, 3];
 var n1 = arr.push(4);
 
@@ -146,6 +148,17 @@ var n2 = arr.pop();
 
 console.log(n2); // 4
 ```
+
+```js
+var list1 = List.of(1, 2, 3);
+var list2 = list1.push(4);
+
+console.log(list2.toArray()); // [1, 2, 3, 4]
+
+var list3 = list2.pop();
+
+console.log(list3.toArray()); // [1, 2, 3]
+
 
 ```js
  _saveTodo(todo) {
