@@ -165,42 +165,38 @@ console.log(list3.toArray()); // [1, 2, 3]
 
 Add a todo item to our immutable state by updating our `data` `Map` and pushing the `todo` item to the `todoList` `List`.
 ```js
- _saveTodo(todo) {
-    this._recordHistory();
-
-    this.setState(({data}) => ({
-      data: data.update('todoList', (todoList) =>
-        (todoList.push(Map({
-          item: todo,
-          selected: false
-        }))
-      ))
-    }));
-  }
+_saveTodo(todo) {
+  // ...
+  this.setState(({data}) => ({
+    data: data.update('todoList', (todoList) =>
+      (todoList.push(Map({
+        item: todo,
+        selected: false
+      }))
+    ))
+  }));
+}
 ```
 
 ```js
-  _completeTodo(completedTodoIndex) {
-    this._recordHistory();
-
-    this.setState(({data}) => ({
-      data: data.update('todoList', (todoList) =>
-        todoList.map((todo, index) => {
-          return (completedTodoIndex === index) ?
-            todo.set('selected', !todo.get('selected')) : todo;
-        }))
-    }));
-  }
+_completeTodo(completedTodoIndex) {
+  // ...
+  this.setState(({data}) => ({
+    data: data.update('todoList', (todoList) =>
+      todoList.map((todo, index) => {
+        return (completedTodoIndex === index) ?
+          todo.set('selected', !todo.get('selected')) : todo;
+      }))
+  }));
+}
 ```
 
 ```js
-  _deleteTodo(todoIndex) {
-    this._recordHistory();
-
-    this.setState(({data}) => ({
-      data: data.update('todoList', (todoList) =>
-        todoList.delete(todoIndex))
-    }));
-  }
+_deleteTodo(todoIndex) {
+  // ...
+  this.setState(({data}) => ({
+    data: data.update('todoList', (todoList) =>
+      todoList.delete(todoIndex))
+  }));
 }
 ```
