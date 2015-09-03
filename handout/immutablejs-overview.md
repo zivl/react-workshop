@@ -99,7 +99,7 @@ Couple potential issues with this approach are:
 2. Too many **copy** operations is expensive 
 
 However, we don't necessarily have to copy the entire data, but instead keep the unchanged portion of it and mutate only the chunk of it. In another words we can share the data structure of the original data with the changed one.
-In **ImmutableJS** this is done with the help of **Hash Tires** and it works really well because it takes adventage of shared data.
+In **ImmutableJS** this is done with the help of **[Hash Map Tries](https://en.wikipedia.org/wiki/Hash_array_mapped_trie)** and **[Vector Tries]**(http://hypirion.com/musings/understanding-persistent-vector-pt-1) it works really well because it takes adventage of the structural sharing.
 
 ### ImmutableJS API
 ImmutableJS is a library which was inspired by the lack of **persistent** data structures and the difficuly of tracking mutation and maintaining state.
