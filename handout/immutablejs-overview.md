@@ -163,6 +163,21 @@ console.log(list3.toArray()); // [1, 2, 3]
 
 ### Todo app with immutable state
 
+We can't make `state` immutable but it should be treated as such. However, in order to enforce immutable state we can augment `this.state` with a `Map` which we call `data` in the example below.
+```js
+constructor(props) {
+  super(props);
+
+  this.state = {
+    data: Map({
+      todoList: List()
+    })
+  };
+
+  // ...
+}
+```
+
 Add a todo item to our immutable state by updating our `data` `Map` and pushing the `todo` item to the `todoList` `List`.
 ```js
 _saveTodo(todo) {
