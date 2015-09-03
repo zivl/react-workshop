@@ -149,6 +149,7 @@ var n2 = arr.pop();
 console.log(n2); // 4
 ```
 
+In `List` `push` and `pop` returns the new mutated list.
 ```js
 var list1 = List.of(1, 2, 3);
 var list2 = list1.push(4);
@@ -160,7 +161,6 @@ var list3 = list2.pop();
 console.log(list3.toArray()); // [1, 2, 3]
 ```
 
-In `List` `push` and `pop` returns the new mutated list.
 ```js
  _saveTodo(todo) {
     this._recordHistory();
