@@ -38,8 +38,7 @@ export default class Todo extends React.Component {
         <TodoList todos={todoList}
                   onDelete={this._deleteTodo}
                   onComplete={this._completeTodo} />
-        <TodoForm todos={todoList}
-                  onSave={this._saveTodo} />
+        <TodoForm onSave={this._saveTodo} />
       </div>
     );
   }
@@ -53,10 +52,10 @@ export default class Todo extends React.Component {
     var { data } = this.state;
     var { history } = this;
 
-    if(!history.get(direction).size > 0) {
+    if (!history.get(direction).size > 0) {
       return;
     }
-    var oppDirection = (direction === 'forward'? 'backward' : 'forward');
+    var oppDirection = (direction === 'forward' ? 'backward' : 'forward');
 
     var nextData = history.get(direction).last();
 
@@ -69,7 +68,7 @@ export default class Todo extends React.Component {
     });
   }
 
-  _saveTodo(todo, todos) {
+  _saveTodo(todo) {
     this._recordHistory();
 
     this.setState(({data}) => ({
@@ -79,7 +78,7 @@ export default class Todo extends React.Component {
           selected: false
         }))
       ))
-    }))
+    }));
   }
 
   _completeTodo(completedTodoIndex) {
@@ -91,16 +90,16 @@ export default class Todo extends React.Component {
           return (completedTodoIndex === index) ?
             todo.set('selected', !todo.get('selected')) : todo;
         }))
-    }))
+    }));
   }
 
-  _deleteTodo(todoIndex, todos) {
+  _deleteTodo(todoIndex) {
     this._recordHistory();
 
     this.setState(({data}) => ({
       data: data.update('todoList', (todoList) =>
         todoList.delete(todoIndex))
-    }))
+    }));
   }
 }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { List } from 'immutable';
 
 export default class TodoForm extends React.Component {
 
@@ -8,7 +7,7 @@ export default class TodoForm extends React.Component {
       ref: 'newTodo',
       type: 'text',
       placeholder: 'New todo'
-    }
+    };
 
     return (
       <div>
@@ -25,7 +24,7 @@ export default class TodoForm extends React.Component {
 
   saveTodo() {
     var { newTodo } = this.refs;
-    var { onSave, todos } = this.props;
+    var { onSave } = this.props;
     var value = React.findDOMNode(newTodo).value;
 
     if (!value) {
@@ -33,11 +32,10 @@ export default class TodoForm extends React.Component {
     }
 
     React.findDOMNode(newTodo).value = null;
-    onSave(value, todos);
+    onSave(value);
   }
 }
 
 TodoForm.propTypes = {
-  todos: React.PropTypes.instanceOf(List),
   onSave: React.PropTypes.func.isRequired
 };
