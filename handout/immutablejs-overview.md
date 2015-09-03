@@ -29,7 +29,7 @@ In JavaScript we have 6 primitive data types:
 Note: Symbol was introduced in ECMAScript 6
 ```
 
-All of these primitive data types are **immutable** which means their values cannot be changed and instead new values are created from them. For example, assign a string literal ` "Hello" ` to a variable ` str ` and then attempt to change the first character to ` "Y" ` in the following way:
+All of these primitive data types are **immutable** which means their values cannot be changed. For example, assign a string literal ` "Hello" ` to a variable ` str ` and then attempt to change the first character to ` "Y" ` in the following way:
 
 ```javascript
 var str = 'Hello';
@@ -55,7 +55,7 @@ console.log(num1); // num1 is still 12
 console.log(num2); // num2 is the new value 15
 
 num1 += 4;         // num1 now points to the new value, 
-                   //   we chose not to save it's previous value
+                   //   we just chose not to save it's previous value
 
 console.log(num1); // 16
 ```
@@ -92,15 +92,24 @@ console.log(newArr.toArray()); // [1, 2, 3, 4] <= the new modified array
 
 ### Structural Sharing
 
-It seems to be a good thing to have **persistent immutable data structures** in JavaScript but unfortunately the language does not provide that. The only solution is to create an API which would wrap mutable data and enable the users to use it as if it was immutable. Under the covers this API would make a copy of the mutable data, perform certain change to the copy and then return it.
-Couple major issues with this approach are:
+It seems to be a good thing to have **persistent immutable data structures** in JavaScript. Since persistent data structures are not native to the language the only solution is to create an API which would wrap mutable data and enable the users to use it as if it was immutable. Under the covers this API would make a copy of the mutable data, perform certain change to the copy and then return it.
+Couple potential issues with this approach are:
 
-1. making copy of each data chunk that we want to modify could take too much memory;
-2. going through entire data chunks just to make one single change take too many CPU cycles. 
+1. Might cost too much memory since we have many copies and,
+2. Too many **copy** operations is expensive 
 
-However, we can take the advantage of the fact that making change of small chunk of the data it means that the rest of the data should remain untouched. In another words we can share the data structure of the original data with the changed one.
-In ImmutableJS this is done with the help of Hash Tires and it works
+However, we don't necessarily have to copy the entire data, but instead keep the unchanged portion of it and mutate only the chunk of it. In another words we can share the data structure of the original data with the changed one.
+In **ImmutableJS** this is done with the help of **Hash Tires** and it works really well because it takes adventage of shared data.
 
 ### ImmutableJS API
-ImmutableJS is a library which was inspired by the lack of **persistent** data structures 
+ImmutableJS is a library which was inspired by the lack of **persistent** data structures and the difficuly of tracking mutation and maintaining state.
+It provides the following data structures 
+
+- List 
+- Stack
+- Map
+- OrderedMap
+- Set
+- OrderedSet
+- Record
 
