@@ -1,4 +1,5 @@
 import React from 'react';
+import {List} from 'immutable';
 
 export default class TodoList extends React.Component {
 
@@ -8,16 +9,16 @@ export default class TodoList extends React.Component {
     var rows = todos.map((value, index) => {
       return (
         <li key={index}>
-          <button onClick={onDelete.bind(null, value)}>X</button>
-          <label className={value.selected ? 'todo-item-completed' : 'todo-item'}
-                 onClick={onComplete.bind(null, value)}>{value.item}
+          <button onClick={onDelete.bind(null, index)}>X</button>
+          <label className={value.get('selected') ? 'todo-item-completed' : 'todo-item'}
+                 onClick={onComplete.bind(null, index)}>{value.get('item')}
           </label>
 
         </li>
       );
     });
 
-    if (todos.length <= 0) {
+    if (todos.size <= 0) {
       return (<div>Nothing Here!</div>);
     }
 
@@ -30,7 +31,7 @@ export default class TodoList extends React.Component {
 }
 
 TodoList.propTypes = {
-  todos: React.PropTypes.array,
+  todos: React.PropTypes.instanceOf(List),
   onDelete: React.PropTypes.func.isRequired,
   onComplete: React.PropTypes.func.isRequired,
 };
