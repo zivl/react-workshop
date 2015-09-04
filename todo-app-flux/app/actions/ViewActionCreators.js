@@ -30,4 +30,4 @@ class ViewActionCreators {
   }
 }
 
-module.exports = new ViewActionCreators();
+export default new ViewActionCreators();
