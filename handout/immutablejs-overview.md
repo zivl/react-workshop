@@ -162,6 +162,66 @@ console.log(list3.toArray()); // [1, 2, 3]
 ```
 
 ### Map
+Map is an unordered KeyedIterable of (key, value) pairs.
+The order of iteration is undefined but stable. Multiple iterations of the same Map will iterate in the same order.
+
+```js
+let person1 = Map({
+  name: 'John',
+  age: '29',
+  gender: 'male'
+});
+
+
+let printNext = (iterator) => {
+  let el = iterator.next();
+  if(!el.done) {
+    console.log(el.value);
+    printNext(iterator);
+  }
+}
+
+let printKeys = (myMap) => {
+  printNext(myMap.keys());
+}
+
+// the following two lines will print the keys of person1 in same order
+printKeys(person1); // name, age, gender
+printKeys(person1); // name, age, gender
+```
+
+We can `set` and `update` values of a `Map`:
+```js
+// Set example 1
+let person1 = Map({
+  name: 'John',
+  age: '29',
+  gender: 'male',
+  friends: List()
+});
+
+let person2 = person1.set('name', 'Mike');
+
+console.log(person1.get('name')); // John
+console.log(person2.get('name')); // Mike
+
+```
+
+```js
+// Set example 2
+let person1 = Map({
+  name: 'John',
+  age: '29',
+  gender: 'male',
+  friends: List()
+});
+
+let person2 = person1.set('birthday', 'Nov,03,1988');
+
+console.log(person1.get('birthday')); // undefined
+console.log(person2.get('birthday')); // Nov,03,1988
+
+```
 
 ```js
 let person1 = Map({
@@ -175,8 +235,8 @@ let person2 = person1.update('name', (name) => name + ' Doe');
 
 console.log(person1.get('name')); // John
 console.log(person2.get('name')); // John Doe
-```
 
+```
 ### Todo app with immutable state
 
 We can't make `this.state` *immutable* but it should be treated as such. However, in order to enforce immutable state we can augment `this.state` with a `Map` which in our case is `data`.
