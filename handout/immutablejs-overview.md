@@ -206,7 +206,7 @@ console.log(person1.get('name')); // John
 console.log(person2.get('name')); // Mike
 
 ```
-
+We can introduce a new key-value pair with `set`.
 ```js
 // Set example 2
 let person1 = Map({
@@ -222,8 +222,9 @@ console.log(person1.get('birthday')); // undefined
 console.log(person2.get('birthday')); // Nov,03,1988
 
 ```
-
+The `update` method requires an **updater** function:
 ```js
+// Update example 1
 let person1 = Map({
   name: 'John',
   age: '29',
@@ -237,8 +238,11 @@ console.log(person1.get('name')); // John
 console.log(person2.get('name')); // John Doe
 
 ```
+If we want to add *friends* to our `person1`, we can do that with an `updater`.
+It is important to keep the immutability consistent by having the `friends` as a `List` of `Map`s instead od plain JS objects:
 
 ```js
+// Update example 2
 let person1 = Map({
   name: 'John',
   age: '29',
@@ -263,6 +267,8 @@ console.log(person2.get('friends').toJS()); // we have 2 friends, see image belo
 ```
 ![](https://raw.githubusercontent.com/rangle/react-workshop/immutable-writeup/handout/images/debug-map-1.png)
 
+To check the complete ImmutableJS API follow this [link](https://facebook.github.io/immutable-js/docs/#/).
+You can play with ImmutableJS in the immutableJS and ES6 ready pen [here](http://codepen.io/andrejkn/pen/WQbKoE).
 ### Todo app with immutable state
 
 We can't make `this.state` *immutable* but it should be treated as such. However, in order to enforce immutable state we can augment `this.state` with a `Map` which in our case is `data`.
