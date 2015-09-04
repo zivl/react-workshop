@@ -10,4 +10,4 @@ class AppDispatcher extends Dispatcher {
   }
 }
 
-module.exports = new AppDispatcher();
+export default new AppDispatcher();
