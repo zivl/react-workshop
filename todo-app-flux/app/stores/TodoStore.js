@@ -75,4 +75,4 @@ class TodoStore extends EventEmitter {
   }
 };
 
-module.exports = new TodoStore();
+export default new TodoStore();
