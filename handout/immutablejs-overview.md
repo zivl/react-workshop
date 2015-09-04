@@ -261,6 +261,7 @@ let person2 = person1.update('friends', (fs) =>
 console.log(person1.get('friends').toJS()); // []
 console.log(person2.get('friends').toJS()); // we have 2 friends, see image below
 ```
+[](https://raw.githubusercontent.com/rangle/react-workshop/immutable-writeup/handout/images/debug-map-1.png)
 
 ### Todo app with immutable state
 
