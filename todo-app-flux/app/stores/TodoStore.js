@@ -1,62 +1,52 @@
-var assign = require('object-assign');
-var EventEmitter = require('events').EventEmitter;
-var AppDispatcher = require('../dispatcher/AppDispatcher.js');
-var ActionTypes = require('../constants/Constants.js').ActionTypes;
+import assign from 'object-assign';
+import { EventEmitter } from 'events';
+import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import { CHANGE_EVENT, ActionTypes } from '../constants/Constants.js';
 
-var events = new EventEmitter();
-var CHANGE_EVENT = 'CHANGE';
+class TodoStore extends EventEmitter {
+  constructor() {
+    super();
 
-var state = {
-  todoList: [{
-    item: 'Learn React',
-    selected: false
-  }, {
-    item: 'Learn Flux',
-    selected: false
-  }]
-};
-
-function setState(newState) {
-  assign(state, newState);
-  events.emit(CHANGE_EVENT);
-}
-
-var TodoStore = {
-  addChangeListener: (fn) => {
-    events.addListener(CHANGE_EVENT, fn);
-  },
-
-  removeChangeListener: (fn) => {
-    events.removeListener(CHANGE_EVENT, fn);
-  },
-
-  getState: () => {
-    return state;
-  },
-
-  getTodosRemaining: () => {
-    return state.todoList.reduce((acc, i) => {
-      if (!i.selected) {
-        acc += 1;
-      }
-
-      return acc;
-    }, 0);
+    this.state = {
+      todoList: [{
+        item: 'Learn React',
+        selected: false
+      }, {
+        item: 'Learn Flux',
+        selected: false
+      }]
+    };
+    this.dispatchToken = AppDispatcher.register(this._handleAction.bind(this));
   }
-};
 
-TodoStore.dispatchToken = AppDispatcher.register(function (payload) {
-  var { action } = payload;
+  addChangeListener(fn) {
+    this.addListener(CHANGE_EVENT, fn);
+  }
 
-  switch (action.type) {
+  removeChangeListener(fn) {
+    this.removeListener(CHANGE_EVENT, fn);
+  }
 
+  getState() {
+    return this.state;
+  }
+
+  setState(newState) {
+    this.state = assign(this.state, newState);
+    this.emit(CHANGE_EVENT);
+  }
+
+  _handleAction(payload) {
+    var { action } = payload;
+
+    switch (action.type) {
     case ActionTypes.LOAD_TODOS:
-      setState(TodoStore.getState());
+      this.setState(this.getState());
       break;
 
     case ActionTypes.TODO_TOGGLED:
-      setState({
-        todoList: state.todoList.map(todo => {
+      this.setState({
+        todoList: this.state.todoList.map(todo => {
           if (action.todo === todo) {
             todo.selected = !todo.selected;
           }
@@ -66,8 +56,8 @@ TodoStore.dispatchToken = AppDispatcher.register(function (payload) {
       break;
 
     case ActionTypes.TODO_ADDED:
-      setState({
-        todoList: state.todoList.concat({
+      this.setState({
+        todoList: this.state.todoList.concat({
           item: action.todo,
           selected: false
         })
@@ -75,13 +65,14 @@ TodoStore.dispatchToken = AppDispatcher.register(function (payload) {
       break;
 
     case ActionTypes.TODO_DELETED:
-      setState({
-        todoList: state.todoList.filter(value => {
+      this.setState({
+        todoList: this.state.todoList.filter(value => {
           return value !== action.todo;
         })
       });
       break;
+    }
   }
-});
+};
 
-module.exports = TodoStore;
+module.exports = new TodoStore();

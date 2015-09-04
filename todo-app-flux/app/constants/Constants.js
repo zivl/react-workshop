@@ -1,6 +1,8 @@
-var keyMirror = require('react/lib/keyMirror');
+import keyMirror from 'react/lib/keyMirror';
 
 module.exports = {
+
+  CHANGE_EVENT: 'CHANGE',
 
   ActionTypes: keyMirror({
     LOAD_TODOS: null,
