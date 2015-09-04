@@ -237,6 +237,31 @@ console.log(person1.get('name')); // John
 console.log(person2.get('name')); // John Doe
 
 ```
+
+```js
+let person1 = Map({
+  name: 'John',
+  age: '29',
+  gender: 'male',
+  friends: List()
+});
+
+let person2 = person1.update('friends', (fs) =>
+  fs.push(Map({
+    name: 'Maria',
+    age: 27,
+    gender: 'female'
+  })).push(Map({
+    name: 'Petter',
+    age: 32,
+    gender: 'male'
+  }))
+);
+
+console.log(person1.get('friends').toJS()); // []
+console.log(person2.get('friends').toJS()); // we have 2 friends, see image below
+```
+
 ### Todo app with immutable state
 
 We can't make `this.state` *immutable* but it should be treated as such. However, in order to enforce immutable state we can augment `this.state` with a `Map` which in our case is `data`.
