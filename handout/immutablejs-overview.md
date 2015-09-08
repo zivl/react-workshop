@@ -304,8 +304,13 @@ this.setState((previousState) => {
 ```
 Since `this.state.data` contains our **immutable** state we can update the `data` `Map` in the following way:
 ```js
+let updaterCallback = (k) => {
+  // ... do something with k
+  return newVal; // new value for the key k
+};
+
 this.setState((previousState) => ({
-  data: previousState.data.update('KEY', (d) => ( //... ))
+  data: previousState.data.update('someKey', updaterCallback)
 }));
 ```
 OR this would look cleaner by taking advantage of **ES6** deconstructing feature:
@@ -314,8 +319,6 @@ this.setState(({data}) => ({
   data: data.update('KEY', (d) => ( //... ))
 }));
 ```
-
-
 
 Add a **TODO item** to our immutable state by updating our `data` `Map` and pushing the `todo` item to the `todoList` `List`.
 ```js
