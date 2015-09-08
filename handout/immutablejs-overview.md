@@ -308,7 +308,7 @@ this.setState((previousState) => ({
   data: previousState.data.update('KEY', (d) => ( //... ))
 }));
 ```
-OR this would look cleaner by taking adventage of **ES6** deconstructors:
+OR this would look cleaner by taking adventage of **ES6** deconstructing feature:
 ```js
 this.setState(({data}) => ({
   data: data.update('KEY', (d) => ( //... ))
