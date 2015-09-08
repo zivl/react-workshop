@@ -1,9 +1,8 @@
 import React from 'react';
 import TodoList from './todo-list/todo-list';
 import TodoForm from './todo-form/todo-form';
-
 import TodoStore from '../../stores/TodoStore';
-import ViewActionCreators from '../../actions/ViewActionCreators.js';
+import TodoActions from '../../actions/ViewActionCreators';
 
 export default class Todo extends React.Component {
 
@@ -20,7 +19,7 @@ export default class Todo extends React.Component {
 
   componentDidMount() {
     TodoStore.addChangeListener(this.handleStoreChange.bind(this));
-    ViewActionCreators.loadTodos();
+    TodoActions.loadTodos();
   }
 
   componentWillUnmount() {
@@ -49,15 +48,15 @@ export default class Todo extends React.Component {
   }
 
   _saveTodo(todo) {
-    ViewActionCreators.saveTodo(todo);
+    TodoActions.saveTodo(todo);
   }
 
   _completeTodo(todo) {
-    ViewActionCreators.toggleTodo(todo);
+    TodoActions.toggleTodo(todo);
   }
 
   _deleteTodo(todo) {
-    ViewActionCreators.deleteTodo(todo);
+    TodoActions.deleteTodo(todo);
   }
 }
 
