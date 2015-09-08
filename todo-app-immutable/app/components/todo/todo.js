@@ -91,7 +91,7 @@ export default class Todo extends React.Component {
         let toggledItem = selectedItem.set('selected', !selectedState);
         return todoList.set(index, toggledItem);
       })
-    }))
+    }));
   }
 
   _deleteTodo(todoIndex) {
