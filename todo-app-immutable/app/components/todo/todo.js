@@ -81,16 +81,17 @@ export default class Todo extends React.Component {
     }));
   }
 
-  _completeTodo(completedTodoIndex) {
+  _completeTodo(index) {
     this._recordHistory();
 
     this.setState(({data}) => ({
-      data: data.update('todoList', (todoList) =>
-        todoList.map((todo, index) => {
-          return (completedTodoIndex === index) ?
-            todo.set('selected', !todo.get('selected')) : todo;
-        }))
-    }));
+      data: data.update('todoList', (todoList) => {
+        let selectedItem = todoList.get(index);
+        let selectedState = selectedItem.get('selected');
+        let toggledItem = selectedItem.set('selected', !selectedState);
+        return todoList.set(index, toggledItem);
+      })
+    }))
   }
 
   _deleteTodo(todoIndex) {
