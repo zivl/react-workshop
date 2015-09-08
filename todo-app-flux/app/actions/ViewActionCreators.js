@@ -1,34 +1,33 @@
-var ActionTypes = require('../constants/Constants.js').ActionTypes;
-var AppDispatcher = require('../dispatcher/AppDispatcher.js');
+import { ActionTypes } from '../constants/Constants.js';
+import AppDispatcher from '../dispatcher/AppDispatcher.js';
 
-
-var ViewActionCreators = {
-  loadTodos: () => {
+class ViewActionCreators {
+  loadTodos() {
     AppDispatcher.handleViewAction({
       type: ActionTypes.LOAD_TODOS
     });
-  },
+  }
 
-  toggleTodo: (todo) => {
-    AppDispatcher.handleViewAction({
-      type: ActionTypes.TODO_TOGGLED,
-      todo: todo
-    });
-  },
-
-  saveTodo: (todo) => {
+  saveTodo(todo) {
     AppDispatcher.handleViewAction({
       type: ActionTypes.TODO_ADDED,
       todo: todo
     });
-  },
+  }
 
-  deleteTodo: (todo) => {
+  deleteTodo(todo) {
     AppDispatcher.handleViewAction({
       type: ActionTypes.TODO_DELETED,
       todo: todo
     });
   }
-};
 
-module.exports = ViewActionCreators;
+  toggleTodo(todo) {
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.TODO_TOGGLED,
+      todo: todo
+    });
+  }
+}
+
+export default new ViewActionCreators();
