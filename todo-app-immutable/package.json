@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build",
-    "build": "webpack --progress --colors",
+    "start": "webpack-dev-server --hot --progress",
+    "build": "NODE_ENV=production webpack -p",
     "test": "karma start"
   },
   "author": "",
@@ -34,12 +34,12 @@
     "node-sass": "^3.2.0",
     "react-hot-loader": "^1.2.8",
     "sass-loader": "^2.0.1",
+    "source-map-loader": "^0.1.5",
     "style-loader": "^0.12.3",
     "webpack": "^1.11.0",
     "webpack-dev-server": "^1.10.1"
   },
   "dependencies": {
-    "bootstrap-sass": "^3.3.5",
     "react": "^0.13.3",
     "immutable": "^3.7.4"
   }

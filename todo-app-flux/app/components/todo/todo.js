@@ -1,104 +1,69 @@
-'use strict';
-
-import React from "react";
-import TodoList from "./todo-list/todo-list";
-import TodoForm from "./todo-form/todo-form";
-
-import TodoStore from '../../stores/todo-store';
+import React from 'react';
+import TodoList from './todo-list/todo-list';
+import TodoForm from './todo-form/todo-form';
+import TodoStore from '../../stores/TodoStore';
+import TodoActions from '../../actions/ViewActionCreators';
 
 export default class Todo extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.self = this;
+    this.state = {};
 
-    this.state = this.getState();
-
-    this.saveTodo = this.saveTodo.bind(this);
-    this.editTodo = this.editTodo.bind(this);
-    this.deleteTodo = this.deleteTodo.bind(this);
-    this.cancelClick = this.cancelClick.bind(this);
-    this.onChange = this.onChange.bind(this);
-
+    this._saveTodo = this._saveTodo.bind(this);
+    this._deleteTodo = this._deleteTodo.bind(this);
+    this._completeTodo = this._completeTodo.bind(this);
   }
 
-  getState() {
-    return {
-      todoList: TodoStore.getAll(),
-      todo: {},
-      selectedIndex: -1
-    };
-  }
 
   componentDidMount() {
-    TodoStore.addChangeListener(this.onChange);
+    TodoStore.addChangeListener(this.handleStoreChange.bind(this));
+    TodoActions.loadTodos();
   }
 
   componentWillUnmount() {
-    TodoStore.removeChangeListener(this.onChange);
+    TodoStore.removeChangeListener(this.handleStoreChange.bind(this));
   }
 
-  onChange() {
-    this.setState(this.getState());
-  }
-
-  cancelClick() {
-    this.state.selectedIndex = -1;
-    this.state.todo = {};
-    this.setState(this.state);
-  }
-
-  saveTodo(todo) {
-    if (!todo.id && this.state.selectedIndex === -1) {
-      todo.id = (new Date()).getTime();
-      this.state.todoList.push(todo);
-    } else {
-      this.state.todoList[this.state.selectedIndex] = todo;
-    }
-
-    this.state.selectedIndex = -1;
-    this.setState(this.state);
-    setTimeout(this.refs.todoForm.cancelClick);
-  }
-
-  editTodo(index) {
-    this.state.selectedIndex = index;
-    this.setState({
-      todo: this.state.todoList[index]
-    });
-  }
-
-  deleteTodo(index) {
-    this.state.todoList.splice(index, 1);
-    this.state.todo = {};
-    this.setState(this.state);
+  handleStoreChange() {
+    this.setState(TodoStore.getState());
   }
 
   render() {
-    return ( < div >
-      < TodoForm ref = 'todoForm'
-      todo = {
-        this.state.todo
-      }
-      onSave = {
-        this.saveTodo
-      }
-      cancelClick = {
-        this.cancelClick
-      }
-      /> < hr / >
-      < TodoList todos = {
-        this.state.todoList
-      }
-      editClicked = {
-        this.editTodo
-      }
-      deleteClicked = {
-        this.deleteTodo
-      }
-      /> < /div>
+    var { todoList } = this.state;
+    var { children } = this.props;
+
+    return (
+      <div className='app'>
+
+        <h2>{children}</h2>
+        <TodoList todos={todoList}
+                  onDelete={this._deleteTodo}
+                  onComplete={this._completeTodo} />
+        <TodoForm todos={todoList}
+                  onSave={this._saveTodo} />
+      </div>
     );
   }
 
+  _saveTodo(todo) {
+    TodoActions.saveTodo(todo);
+  }
+
+  _completeTodo(todo) {
+    TodoActions.toggleTodo(todo);
+  }
+
+  _deleteTodo(todo) {
+    TodoActions.deleteTodo(todo);
+  }
 }
+
+Todo.propTypes = {
+  children: React.PropTypes.string
+};
+
+Todo.defaultProps = {
+  children : 'My Todo App'
+};

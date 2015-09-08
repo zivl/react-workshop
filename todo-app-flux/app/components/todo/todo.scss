@@ -1,0 +1,24 @@
+body {
+  background: #F0F5F9;
+}
+
+.todo-item {
+  color: #52616B;
+  transition: color 0.2s;
+}
+
+.todo-item-completed {
+  color: #d9d9d9;
+  transition: color 0.2s;
+  text-decoration: line-through;
+}
+
+.todo-list {
+  list-style-type: none;
+  padding: 5px;
+  margin: 5px;
+
+  button {
+    margin-right: 15px;
+  }
+}

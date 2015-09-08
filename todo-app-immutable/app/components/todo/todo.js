@@ -1,9 +1,8 @@
-'use strict';
-
-import React from "react";
-import {Map, List} from "immutable";
-import TodoList from "./todo-list/todo-list";
-import TodoForm from "./todo-form/todo-form";
+import React from 'react';
+import { List, Map } from 'immutable';
+import TodoList from './todo-list/todo-list';
+import TodoForm from './todo-form/todo-form';
+import TodoHistory from './todo-history/todo-history';
 
 export default class Todo extends React.Component {
 
@@ -12,126 +11,102 @@ export default class Todo extends React.Component {
 
     this.state = {
       data: Map({
-        todo: Map({}),
-        todoList: List(),
-        selectedIndex: -1
+        todoList: List()
       })
     };
 
-    this.undoStack = [];
-    this.redoStack = [];
-    this.saveTodo = this.saveTodo.bind(this);
-    this.editTodo = this.editTodo.bind(this);
-    this.deleteTodo = this.deleteTodo.bind(this);
-    this.cancelClick = this.cancelClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleUndo = this.handleUndo.bind(this);
-    this.handleRedo = this.handleRedo.bind(this);
-  }
-
-
-  handleUndo() {
-    if(this.undoStack.length) {
-      this.redoStack.push(this.state.data);
-      this.setState({
-        data: this.undoStack.pop()
-      });
-    }
-  }
-
-  handleRedo() {
-    if(this.redoStack.length) {
-      this.setState({
-        data: this.redoStack.pop()
-      });
-    }
-  }
-
-  cancelClick() {
-    this.setState((previousState) => ({
-      data: previousState.data.merge({
-        selectedIndex: -1,
-        todo: {}
-      })
-    }));
-  }
-
-  isTodoItemSelectedToEdit() {
-    return (this.state.data.get('selectedIndex') !== -1);
-  }
-
-  saveTodo(todo) {
-    this.undoStack.push(this.state.data);
-
-    if(this.isTodoItemSelectedToEdit()) {
-      this.setState((previousState) => ({
-        data: previousState.data.update('todoList', (list =>
-          list.set(previousState.data.get('selectedIndex'), todo)))
-      }));
-    } else {
-      this.setState((previousState) => ({
-        data: previousState.data.update('todoList', (list =>
-          list.push(todo)))
-      }));
-    }
-
-    setTimeout(this.refs.todoForm.cancelClick);
-  }
-
-  editTodo(index) {
-    this.undoStack.push(this.state.data);
-
-    this.setState(function(previousState) {
-      return {
-        data: previousState.data.merge({
-          todo: previousState.data.get('todoList').get(index),
-          selectedIndex: index
-        })
-      };
-
+    this.history = Map({
+      backward: List(),
+      forward: List()
     });
-  }
-
-  handleChange(event) {
-    let todoEntry = event.target.value;
-
-    this.undoStack.push(this.state.data);
-
-    this.setState((previousState) => ({
-      data: previousState.data.update('todo', (todo) =>
-        todo.set('name', todoEntry))
-    }));
-  }
-
-  deleteTodo(index) {
-    this.undoStack.push(this.state.data);
-
-    this.setState((previousState) => ({
-      data: previousState.data.update('todoList', function(todoList) {
-        return todoList.delete(index);
-      })
-    }));
+    this._saveTodo = this._saveTodo.bind(this);
+    this._deleteTodo = this._deleteTodo.bind(this);
+    this._completeTodo = this._completeTodo.bind(this);
+    this._traverseHistory = this._traverseHistory.bind(this);
+    this._recordHistory = this._recordHistory.bind(this);
   }
 
   render() {
+    var todoList = this.state.data.get('todoList');
+    var { children } = this.props;
+
     return (
-      <div>
-        <TodoForm
-          ref='todoForm'
-          todo={this.state.data.get('todo')}
-          onSave={this.saveTodo}
-          cancelClick={this.cancelClick}
-          handleChange={this.handleChange}
-          handleUndo={this.handleUndo}
-          handleRedo={this.handleRedo}
-        />
-        <hr/>
-        <TodoList
-          todos={this.state.data.get('todoList')}
-          editClicked={this.editTodo}
-          deleteClicked={this.deleteTodo}
-        />
+      <div className='app'>
+
+        <h2>{children}</h2>
+        <TodoHistory traverseHistory={this._traverseHistory} />
+        <TodoList todos={todoList}
+                  onDelete={this._deleteTodo}
+                  onComplete={this._completeTodo} />
+        <TodoForm onSave={this._saveTodo} />
       </div>
     );
   }
+
+  _recordHistory() {
+    this.history = this.history.update('backward', (historyList) =>
+      historyList.push(this.state.data));
+  }
+
+  _traverseHistory(direction) {
+    var { data } = this.state;
+    var { history } = this;
+
+    if (!history.get(direction).size > 0) {
+      return;
+    }
+    var oppDirection = (direction === 'forward' ? 'backward' : 'forward');
+
+    var nextData = history.get(direction).last();
+
+    this.history = Map({})
+      .set(direction, history.get(direction).pop())
+      .set(oppDirection, history.get(oppDirection).push(data));
+
+    this.setState({
+      data: nextData
+    });
+  }
+
+  _saveTodo(todo) {
+    this._recordHistory();
+
+    this.setState(({data}) => ({
+      data: data.update('todoList', (todoList) =>
+        (todoList.push(Map({
+          item: todo,
+          selected: false
+        }))
+      ))
+    }));
+  }
+
+  _completeTodo(completedTodoIndex) {
+    this._recordHistory();
+
+    this.setState(({data}) => ({
+      data: data.update('todoList', (todoList) =>
+        todoList.map((todo, index) => {
+          return (completedTodoIndex === index) ?
+            todo.set('selected', !todo.get('selected')) : todo;
+        }))
+    }));
+  }
+
+  _deleteTodo(todoIndex) {
+    this._recordHistory();
+
+    this.setState(({data}) => ({
+      data: data.update('todoList', (todoList) =>
+        todoList.delete(todoIndex))
+    }));
+  }
 }
+
+Todo.propTypes = {
+  children: React.PropTypes.string,
+};
+
+Todo.defaultProps = {
+  children : 'My Todo App'
+};

@@ -1,8 +1,6 @@
-'use strict';
-
-import React from "react";
-import TodoList from "./todo-list/todo-list";
-import TodoForm from "./todo-form/todo-form";
+import React from 'react';
+import TodoList from './todo-list/todo-list';
+import TodoForm from './todo-form/todo-form';
 
 export default class Todo extends React.Component {
 
@@ -10,58 +8,64 @@ export default class Todo extends React.Component {
     super(props);
 
     this.state = {
-      todo: {},
       todoList: [],
-      selectedIndex: -1
     };
 
-    this.saveTodo = this.saveTodo.bind(this);
-    this.editTodo = this.editTodo.bind(this);
-    this.deleteTodo = this.deleteTodo.bind(this);
-    this.cancelClick = this.cancelClick.bind(this);
-
-  }
-
-  cancelClick() {
-    this.state.selectedIndex = -1;
-    this.state.todo = {};
-    this.setState(this.state);
-  }
-
-  saveTodo (todo) {
-    if (!todo.id && this.state.selectedIndex === -1) {
-      todo.id = (new Date()).getTime();
-      this.state.todoList.push(todo);
-    } else {
-      this.state.todoList[this.state.selectedIndex] = todo;
-    }
-
-    this.state.selectedIndex = -1;
-    this.setState(this.state);
-    setTimeout(this.refs.todoForm.cancelClick);
-  }
-
-  editTodo (index) {
-    this.state.selectedIndex = index;
-    this.setState({
-      todo: this.state.todoList[index]
-    });
-  }
-
-  deleteTodo (index) {
-    this.state.todoList.splice(index, 1);
-    this.state.todo = {};
-    this.setState(this.state);
+    this._saveTodo = this._saveTodo.bind(this);
+    this._deleteTodo = this._deleteTodo.bind(this);
+    this._completeTodo = this._completeTodo.bind(this);
   }
 
   render() {
+    var { todoList } = this.state;
+    var { children } = this.props;
+
     return (
-      <div>
-        <TodoForm ref='todoForm' todo={this.state.todo} onSave={this.saveTodo} cancelClick={this.cancelClick} />
-        <hr/>
-        <TodoList todos={this.state.todoList} editClicked={this.editTodo} deleteClicked={this.deleteTodo} />
+      <div className='app'>
+
+        <h2>{children}</h2>
+        <TodoList todos={todoList}
+                  onDelete={this._deleteTodo}
+                  onComplete={this._completeTodo} />
+        <TodoForm todos={todoList}
+                  onSave={this._saveTodo} />
       </div>
     );
   }
 
+  _saveTodo(todo, todos) {
+    this.setState({
+      todoList: todos.concat({
+        item: todo,
+        selected: false
+      })
+    });
+  }
+
+  _completeTodo(completedTodo) {
+    this.setState({
+      todoList: this.state.todoList.map(todo => {
+        if (completedTodo === todo) {
+          todo.selected = !todo.selected;
+        }
+        return todo;
+      })
+    });
+  }
+
+  _deleteTodo(todo, todos) {
+    this.setState({
+      todoList: todos.filter(value => {
+        return value !== todo;
+      })
+    });
+  }
 }
+
+Todo.propTypes = {
+  children: React.PropTypes.string,
+};
+
+Todo.defaultProps = {
+  children : 'My Todo App'
+};

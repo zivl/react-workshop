@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import 'bootstrap-sass';
 // import './app.scss';
 
@@ -12,3 +13,13 @@ React.render(
   </div>,
   document.getElementById('main')
 );
+=======
+import React from 'react';
+import Todo from './components/todo/todo';
+import './components/todo/todo.scss';
+
+React.render(
+  <Todo/>,
+  document.getElementById('main')
+);
+>>>>>>> master
