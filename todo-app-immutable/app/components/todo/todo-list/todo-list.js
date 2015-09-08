@@ -1,38 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import TodoRow from '../todo-row/todo-row';
-
-export default class TodoList extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    var rows = [];
-    var _this = this;
-
-    return (
-      <table className="table table-bordered">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {_this.props.todos.map((todo, index) =>
-            <TodoRow
-              todo={todo}
-              key={index}
-              index={index}
-              editClicked={_this.props.editClicked}
-              deleteClicked={_this.props.deleteClicked}
-            />
-          )}
-        </tbody>
-      </table>
-=======
 import React from 'react';
 import {List} from 'immutable';
 
@@ -61,16 +26,11 @@ export default class TodoList extends React.Component {
       <div>
         <ul className='todo-list'>{rows}</ul>
       </div>
->>>>>>> master
     );
   }
 }
 
 TodoList.propTypes = {
-<<<<<<< HEAD
-  editClicked: React.PropTypes.func.isRequired,
-  deleteClicked: React.PropTypes.func.isRequired
-=======
   todos: React.PropTypes.instanceOf(List),
   onDelete: React.PropTypes.func.isRequired,
   onComplete: React.PropTypes.func.isRequired,
@@ -78,5 +38,4 @@ TodoList.propTypes = {
 
 TodoList.defaultProps = {
   todos : []
->>>>>>> master
 };
