@@ -286,6 +286,36 @@ constructor(props) {
   // ...
 }
 ```
+Before looking into the React component's state we should review the `setState` method. We can use `setState` in the following two ways:
+```js
+this.setState(newStateObject);
+// ...
+```
+Or we can pass a callback which returns a new state:
+```js
+this.setState((previousState) => {
+  let newState = {
+    // ...
+  };
+
+  // ...
+  return newState;
+});
+```
+Since `this.state.data` contains our **immutable** state we can update the `data` `Map` in the following way:
+```js
+this.setState((previousState) => ({
+  data: previousState.data.update('KEY', (d) => ( //... ))
+}));
+```
+OR this would look cleaner by taking adventage of **ES6** deconstructors:
+```js
+this.setState(({data}) => ({
+  data: data.update('KEY', (d) => ( //... ))
+}));
+```
+
+
 
 Add a todo item to our immutable state by updating our `data` `Map` and pushing the `todo` item to the `todoList` `List`.
 ```js
@@ -301,6 +331,8 @@ _saveTodo(todo) {
   }));
 }
 ```
+
+The following function `_completeTodo()` toggles a todo item from incomplete to completed and vice versa.
 
 ```js
 _completeTodo(completedTodoIndex) {
