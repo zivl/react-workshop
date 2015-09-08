@@ -100,10 +100,10 @@ Couple potential issues with this approach are:
 2. Too many **copy** operations is expensive.
 
 However, we don't necessarily have to inefficiently copy and cache the data.
-In fact **ImmutableJS** takes adventage of **structural sharing** which is implemented with **[Hash Map Tries](https://en.wikipedia.org/wiki/Hash_array_mapped_trie)** and **[Vector Tries](http://hypirion.com/musings/understanding-persistent-vector-pt-1)**.
+In fact **ImmutableJS** takes advantage of **structural sharing** which is implemented with **[Hash Map Tries](https://en.wikipedia.org/wiki/Hash_array_mapped_trie)** and **[Vector Tries](http://hypirion.com/musings/understanding-persistent-vector-pt-1)**.
 
 ### ImmutableJS API
-ImmutableJS is a library which is inspired by the lack of **persistent** data structures and the difficuly of tracking mutation and maintaining state.
+ImmutableJS is a library which is inspired by the lack of **persistent** data structures and the difficulty of tracking mutation and maintaining state.
 It provides the following data structures
 
 - List
@@ -115,7 +115,7 @@ It provides the following data structures
 - Record
 
 ### List
-`List` can be used as an **array** but it behaves differently as we are going to see below. `List` exposes some usefult methods such as `push`, `pop`, `set`, `delete`. For full domumentation you can check the [documentataion from Facebook](https://facebook.github.io/immutable-js/docs/#/List)
+`List` can be used as an **array** but it behaves differently as we are going to see below. `List` exposes some useful methods such as `push`, `pop`, `set`, `delete`. For full documentation you can check the [documentation from Facebook](https://facebook.github.io/immutable-js/docs/#/List)
 
 Here are some examples of how we can use `List`:
 ```js
@@ -131,11 +131,11 @@ console.log(numbers.toJS());        // 1, 2, 3, 4, 5
 console.log(numbersUpdated.toJS()); // 1, 2, 3, 4, 5, 6
 ```
 ---
-**Note:** We can't just `console.log(numbers)` since `numbers` is not a an array. We can however use the `toJS()` method to convert any Immutable data structure into a JS equivalent, as in our case that would be a `List` to an `array`. Also, we can use the `toArray()` method.
+**Note:** We can't just `console.log(numbers)` since `numbers` is not an array. We can however use the `toJS()` method to convert any Immutable data structure into a JS equivalent, as in our case that would be a `List` to an `array`. Also, we can use the `toArray()` method.
 
 ---
 
-It is important to distinquish the behaviour of `push` and `pop` between JS `Array` and `List`:
+It is important to distinguish the behaviour of `push` and `pop` between JS `Array` and `List`:
 
 In **javascript** regular `Array`, `push` and `pop` return the element that was pushed/popped.
 ```js
@@ -239,7 +239,7 @@ console.log(person2.get('name')); // John Doe
 
 ```
 If we want to add *friends* to our `person1`, we can do that with an `updater`.
-It is important to keep the immutability consistent by having the `friends` as a `List` of `Map`s instead od plain JS objects:
+It is important to keep the immutability consistent by having the `friends` as a `List` of `Map`s instead of plain JS objects:
 
 ```js
 // Update example 2
@@ -308,7 +308,7 @@ this.setState((previousState) => ({
   data: previousState.data.update('KEY', (d) => ( //... ))
 }));
 ```
-OR this would look cleaner by taking adventage of **ES6** deconstructing feature:
+OR this would look cleaner by taking advantage of **ES6** deconstructing feature:
 ```js
 this.setState(({data}) => ({
   data: data.update('KEY', (d) => ( //... ))
@@ -317,7 +317,7 @@ this.setState(({data}) => ({
 
 
 
-Add a todo item to our immutable state by updating our `data` `Map` and pushing the `todo` item to the `todoList` `List`.
+Add a **TODO item** to our immutable state by updating our `data` `Map` and pushing the `todo` item to the `todoList` `List`.
 ```js
 _saveTodo(todo) {
   // ...
