@@ -272,7 +272,7 @@ You can play with ImmutableJS in the immutableJS and ES6 ready pen [here](http:/
 ### Todo app with immutable state
 
 We can't make `this.state` *immutable* but it should be treated as such. However, in order to enforce immutable state we can augment `this.state` with a `Map` which in our case is `data`.
-We can the put everything in this `data` `Map`, for example in our case we have `todoList` as a `List`.
+We can then put everything in this `data` `Map`. For example in our case we have a `List` of TODO items called `todoList`.
 ```js
 constructor(props) {
   super(props);
