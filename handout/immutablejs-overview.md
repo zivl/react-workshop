@@ -5,7 +5,7 @@
   2. Persistent Data Structures
   3. Structural Sharing
   4. ImmutableJS API
-  5. ToDo App with ImmutableJS
+  5. Todo app with ReactJS and ImmutableJS
 
 ### Mutable vs. Immutable
 **Mutable** data can be changed by replacing itself with new one. Mutation of data makes application development difficult because it makes the following things hard:
@@ -283,7 +283,8 @@ console.log(person2.get('friends').toJS()); // we have 2 friends, see image belo
 
 To check the complete ImmutableJS API follow this [link](https://facebook.github.io/immutable-js/docs/#/).
 You can play with ImmutableJS in the immutableJS and ES6 ready pen [here](http://codepen.io/andrejkn/pen/WQbKoE).
-### Todo app with immutable state
+
+### Todo app with ReactJS and ImmutableJS
 
 We can't make `this.state` *immutable* but it should be treated as such. However, in order to enforce immutable state we can augment `this.state` with a `Map` which in our case is `data`.
 We can then put everything in this `data` `Map`. For example in our case we have a `List` of TODO items called `todoList`.
