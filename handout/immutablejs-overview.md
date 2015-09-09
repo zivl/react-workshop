@@ -13,7 +13,7 @@
   1. Keeping track of mutated data, and
   2. Maintaining application state
 
-**Immutable** data cannot be changed, but it can only be copied and then edit the copy. The original data is deleted only if we lose the reference to it.
+**Immutable** data cannot be changed and it makes application development safer and safer.
 
 In JavaScript we have 6 primitive data types:
 
