@@ -1,6 +1,0 @@
-# Outline
-
-* Code Setup
-* Introduction
-* ...
-* ...
