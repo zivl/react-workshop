@@ -1,8 +1,10 @@
-### React Workshop from rangle.io
+### React Workshop
 
-THIS IS WORK IN PROGRESS.
+![react](handout/assets/react_logo.png)
+![react](handout/assets/flux_logo.png)
 
-This repository contains handout materials and code for rangle.io's React workshop, focusing on building applications using React and Flux.
+
+This repository contains handout materials and code for Rangle.io's React workshop, focusing on building applications using React and Flux.
 
 
 
@@ -28,8 +30,7 @@ cd todo-app-immutable
 ```bash
 npm install
 
-npm start // webpack-dev-server (http://localhost:8080/)
-
+npm start // http://localhost:8080/
 
 npm test // to run tests
 
