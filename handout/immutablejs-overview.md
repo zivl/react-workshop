@@ -279,7 +279,7 @@ let person2 = person1.update('friends', (fs) =>
 console.log(person1.get('friends').toJS()); // []
 console.log(person2.get('friends').toJS()); // we have 2 friends, see image below
 ```
-![](https://raw.githubusercontent.com/rangle/react-workshop/immutable-writeup/handout/images/debug-map-1.png)
+![](https://raw.githubusercontent.com/rangle/react-workshop/immutable-writeup/handout/assets/debug-map-1.png)
 
 To check the complete ImmutableJS API follow this [link](https://facebook.github.io/immutable-js/docs/#/).
 You can play with ImmutableJS in the immutableJS and ES6 ready pen [here](http://codepen.io/andrejkn/pen/WQbKoE).
