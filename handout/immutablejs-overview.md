@@ -113,7 +113,7 @@ It seems to be a good idea to have **persistent immutable data structures** in J
   1. Might cost too much **memory** since we keep too many copies and,
   2. Too many **copy** operations is expensive.
 
-However, we don't necessarily have to inefficiently copy and cache the original data, instead we can have a smart implementation of an API that does all that very efficient.
+However, we don't necessarily have to do expensive operations to cache the original data, instead we can have a smart implementation of an API that does all that very efficiently.
 In fact **ImmutableJS** is a great example of such API which takes advantage of **structural sharing** implemented with **[Hash Map Tries](https://en.wikipedia.org/wiki/Hash_array_mapped_trie)** and **[Vector Tries](http://hypirion.com/musings/understanding-persistent-vector-pt-1)**.
 
 ### ImmutableJS API
