@@ -5,14 +5,13 @@
   2. Persistent Data Structures
   3. Structural Sharing
   4. ImmutableJS API
-  5. Build it into To-Do App (undo, time machine)
+  5. ToDo App with ImmutableJS
 
 ### Mutable vs. Immutable
-
 **Mutable** data can be changed by replacing itself with new one. Mutation of data makes application development difficult because it makes the following things hard:
 
-1. Keeping track of mutated data, and
-2. Maintaining application state
+  1. Keeping track of mutated data, and
+  2. Maintaining application state
 
 **Immutable** data cannot be changed, but it can only be copied and then edit the copy. The original data is deleted only if we lose the reference to it.
 
@@ -76,9 +75,9 @@ console.log(abc); // 4            <= We have lost the original array!!
 
 ### Persistent Data Structures
 
-Persistent data structures provides operators which allow users to perform certain manipulation to the data without changing the original. Such data structure is effectively **immutable**.
+Persistent data structures provides operators/methods which allow users to perform certain manipulation to the data without changing the original. Such data structure is effectively **immutable**.
 
-From our previous example we saw that an `Array` is immutable, and pushing an element onto it would return a new array `[1, 2, 3, 4]` i.e. `arr.push(4)` would return `[1, 2, 3, 4]`.
+From our previous example we saw that an `Array` is immutable, and pushing an element onto it would replace the original with the new array `[1, 2, 3, 4]`. The `push` method returns the element that was pushed and not the mutated array.
 
 Ideally we want some **immutable** array data structure which would look something like this:
 ```javascript
@@ -89,7 +88,7 @@ console.log(arr.toArray());    // [1,2,3]      <= The old array is preserved
 console.log(newArr.toArray()); // [1, 2, 3, 4] <= the new modified array
 ```
 
-We can create **immutable** objects in JavaScript without using any external libraries. This can be done by the use of the **ES5** and **ES6** `Object.assign()` and `Object.freeze`.
+By default objects in JS are mutable, as we already saw, however we can make them **immutable** without using any external libraries. This can be done by the use of the **ES5** and **ES6** `Object.assign()` and `Object.freeze`.
 ```js
 var a = [1, 2, 3, 4];
 var a_copy = Object.assign([], a);
@@ -109,14 +108,13 @@ console.log(a_copy);  // [600, 2, 3, 4, 900]  <= We can mutate the copy!!
 
 ### Structural Sharing
 
-It seems to be a good thing to have **persistent immutable data structures** in JavaScript. Since persistent data structures are not native to the language the only solution is to create an API which would wrap mutable data and enable the users to use it as if it was immutable. Under the covers this API would make a copy of the mutable data, **FREEZE** the original data to prevent any changes, perform certain change to the copy and then return it.
-Couple potential issues with this approach are:
+It seems to be a good idea to have **persistent immutable data structures** in JavaScript. Even though we can manually copy and freeze objects (as well as arrays and function) it would be still great to have some API that would enable us to use **immutable data structures**. The reason for that is because manual copying has the following problems:
 
-1. Might cost too much memory since we keep too many copies and,
-2. Too many **copy** operations is expensive.
+  1. Might cost too much **memory** since we keep too many copies and,
+  2. Too many **copy** operations is expensive.
 
-However, we don't necessarily have to inefficiently copy and cache the data.
-In fact **ImmutableJS** takes advantage of **structural sharing** which is implemented with **[Hash Map Tries](https://en.wikipedia.org/wiki/Hash_array_mapped_trie)** and **[Vector Tries](http://hypirion.com/musings/understanding-persistent-vector-pt-1)**.
+However, we don't necessarily have to inefficiently copy and cache the original data, instead we can have a smart implementation of an API that does all that very efficient.
+In fact **ImmutableJS** is a great example of such API which takes advantage of **structural sharing** implemented with **[Hash Map Tries](https://en.wikipedia.org/wiki/Hash_array_mapped_trie)** and **[Vector Tries](http://hypirion.com/musings/understanding-persistent-vector-pt-1)**.
 
 ### ImmutableJS API
 ImmutableJS is a library which is inspired by the lack of **persistent** data structures and the difficulty of tracking mutation and maintaining state.
