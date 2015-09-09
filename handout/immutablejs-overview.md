@@ -145,7 +145,7 @@ console.log(numbers.toJS());        // 1, 2, 3, 4, 5
 console.log(numbersUpdated.toJS()); // 1, 2, 3, 4, 5, 6
 ```
 ---
-**Note:** We can't just `console.log(numbers)` since `numbers` is not an array. We can however use the `toJS()` method to convert any Immutable data structure into a JS equivalent, as in our case that would be a `List` to an `array`. Also, we can use the `toArray()` method.
+**Note:** We can't just `console.log(numbers)` since `numbers` is not an array. We can however use the `toJS()` method to convert any Immutable data structure to a JS equivalent, as in our case that would be a `List` to an `array`. Also, we can use the `toArray()` method.
 
 ---
 
