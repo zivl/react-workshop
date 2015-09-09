@@ -13,7 +13,7 @@
   1. Keeping track of mutated data, and
   2. Maintaining application state
 
-**Immutable** data cannot be changed and it makes application development safer and safer.
+**Immutable** data cannot be changed and it makes application development safer and simpler.
 
 In JavaScript we have 6 primitive data types:
 
