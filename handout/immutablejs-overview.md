@@ -144,7 +144,7 @@ let numbersUpdated = numbers.push(6); // 1, 2, 3, 4, 5, 6
 console.log(numbers.toJS());        // 1, 2, 3, 4, 5
 console.log(numbersUpdated.toJS()); // 1, 2, 3, 4, 5, 6
 ```
-[Run Code](http://jsfiddle.net/p0kywz66/)
+**[Run Code](http://jsfiddle.net/p0kywz66/)**
 
 ---
 **Note:** We can't just `console.log(numbers)` since `numbers` is not an array. We can however use the `toJS()` method to convert any Immutable data structure to a JS equivalent, as in our case that would be a `List` to an `array`. Also, we can use the `toArray()` method.
@@ -222,6 +222,8 @@ console.log(person1.get('name')); // John
 console.log(person2.get('name')); // Mike
 
 ```
+**[Run Code](http://jsfiddle.net/twy09d2z/)**
+
 We can introduce a new key-value pair with `set`.
 ```js
 // Set example 2
@@ -254,7 +256,7 @@ console.log(person1.get('name')); // John
 console.log(person2.get('name')); // John Doe
 
 ```
-[Run Code](http://jsfiddle.net/gue282q8/)
+**[Run Code](http://jsfiddle.net/gue282q8/)**
 
 If we want to add *friends* to our `person1`, we can do that with an `updater`.
 It is important to keep the immutability consistent by having the `friends` as a `List` of `Map`s instead of plain JS objects:
