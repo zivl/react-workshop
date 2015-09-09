@@ -4,16 +4,22 @@ import TodoForm from './todo-form/todo-form';
 
 export default class Todo extends React.Component {
 
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    children: React.PropTypes.string,
+  }
 
-    this.state = {
-      todoList: [],
-    };
+  static defaultProps = {
+    children : 'My Todo App'
+  };
 
-    this._saveTodo = this._saveTodo.bind(this);
-    this._deleteTodo = this._deleteTodo.bind(this);
-    this._completeTodo = this._completeTodo.bind(this);
+  state = {
+    todoList: [{
+      item: 'Learn React',
+      selected: false
+    }, {
+      item: 'Learn Flux',
+      selected: false
+    }]
   }
 
   render() {
@@ -33,7 +39,7 @@ export default class Todo extends React.Component {
     );
   }
 
-  _saveTodo(todo, todos) {
+  _saveTodo = (todo, todos) => {
     this.setState({
       todoList: todos.concat({
         item: todo,
@@ -42,9 +48,10 @@ export default class Todo extends React.Component {
     });
   }
 
-  _completeTodo(completedTodo) {
+  _completeTodo = (completedTodo) => {
+    var { todoList } = this.state;
     this.setState({
-      todoList: this.state.todoList.map(todo => {
+      todoList: todoList.map(todo => {
         if (completedTodo === todo) {
           todo.selected = !todo.selected;
         }
@@ -53,7 +60,7 @@ export default class Todo extends React.Component {
     });
   }
 
-  _deleteTodo(todo, todos) {
+  _deleteTodo = (todo, todos) => {
     this.setState({
       todoList: todos.filter(value => {
         return value !== todo;
@@ -61,11 +68,3 @@ export default class Todo extends React.Component {
     });
   }
 }
-
-Todo.propTypes = {
-  children: React.PropTypes.string,
-};
-
-Todo.defaultProps = {
-  children : 'My Todo App'
-};

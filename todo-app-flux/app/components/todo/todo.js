@@ -6,27 +6,34 @@ import TodoActions from '../../actions/ViewActionCreators';
 
 export default class Todo extends React.Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-
-    this._saveTodo = this._saveTodo.bind(this);
-    this._deleteTodo = this._deleteTodo.bind(this);
-    this._completeTodo = this._completeTodo.bind(this);
+  static propTypes = {
+    children: React.PropTypes.string
   }
 
+  static defaultProps = {
+    children : 'My Todo App'
+  }
+
+  state = {
+    todoList: [{
+      item: 'Learn React',
+      selected: false
+    }, {
+      item: 'Learn Flux',
+      selected: false
+    }]
+  }
 
   componentDidMount() {
-    TodoStore.addChangeListener(this.handleStoreChange.bind(this));
+    TodoStore.addChangeListener(this.handleStoreChange);
     TodoActions.loadTodos();
   }
 
   componentWillUnmount() {
-    TodoStore.removeChangeListener(this.handleStoreChange.bind(this));
+    TodoStore.removeChangeListener(this.handleStoreChange);
   }
 
-  handleStoreChange() {
+  handleStoreChange = () => {
     this.setState(TodoStore.getState());
   }
 
@@ -47,23 +54,15 @@ export default class Todo extends React.Component {
     );
   }
 
-  _saveTodo(todo) {
+  _saveTodo = (todo) => {
     TodoActions.saveTodo(todo);
   }
 
-  _completeTodo(todo) {
+  _completeTodo = (todo) => {
     TodoActions.toggleTodo(todo);
   }
 
-  _deleteTodo(todo) {
+  _deleteTodo = (todo) => {
     TodoActions.deleteTodo(todo);
   }
 }
-
-Todo.propTypes = {
-  children: React.PropTypes.string
-};
-
-Todo.defaultProps = {
-  children : 'My Todo App'
-};

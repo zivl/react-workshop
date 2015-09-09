@@ -2,27 +2,33 @@ import React from 'react';
 
 export default class TodoForm extends React.Component {
 
+  static propTypes = {
+    todos: React.PropTypes.array,
+    onSave: React.PropTypes.func.isRequired
+  }
+
   render() {
     var props = {
       ref: 'newTodo',
       type: 'text',
       placeholder: 'New todo'
-    }
+    };
 
     return (
       <div>
-        <input {...props}
-               onKeyDown={(event) => {
-                 if (event.keyCode === 13) {
-                   this.saveTodo();
-                 }
-               }}/>
-        <button onClick={this.saveTodo.bind(this)}>Add</button>
+        <input {...props} onKeyDown={this.handleEnterKey}/>
+        <button onClick={this.saveTodo}>Add</button>
       </div>
     );
   }
 
-  saveTodo() {
+  handleEnterKey = (event) => {
+    if (event.keyCode === 13) {
+      this.saveTodo();
+    }
+  }
+
+  saveTodo = () => {
     var { newTodo } = this.refs;
     var { onSave, todos } = this.props;
     var value = React.findDOMNode(newTodo).value;
@@ -35,8 +41,3 @@ export default class TodoForm extends React.Component {
     onSave(value, todos);
   }
 }
-
-TodoForm.propTypes = {
-  todos: React.PropTypes.array,
-  onSave: React.PropTypes.func.isRequired
-};

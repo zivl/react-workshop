@@ -41,7 +41,7 @@ describe('todo-list', () => {
     });
   });
 
-  describe('todo-list without empty todo list', () => {
+  describe('todo-list with empty todo list', () => {
 
     beforeEach((done) => {
       _todoList = [];
