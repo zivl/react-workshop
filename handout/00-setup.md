@@ -54,14 +54,6 @@ echo 'export PATH="$PATH:/c/Program Files (x86)/nodejs"' >> ~/.bashrc
 
 Please install a recent version of Google Chrome, since we'll be using tools that assume it.
 
-## Postman HTTP Client
-
-Postman is our preferred tool for interacting with a REST API server.
-
-<http://www.getpostman.com/>
-
-Postman is less essential and if you have another HTTP client that you prefer, this is fine too.
-
 ## A Code Editor
 
 Any text editor will work. At Rangle.io the most popular editors/IDEs are:
@@ -79,65 +71,7 @@ Clone the training repository:
 
 ```sh
   git clone https://github.com/rangle/react-workshop.git
-  cd react-workshop
-```
-
-Install `bower` globally via `npm`:
-
-```sh
-  npm install -g bower
-```
-
-Install the project's `bower` components using `bower`:
-
-```sh
-  bower install
-```
-
-*If you get an error while running this command, see the next section.*
-
-Install `http-server` using `npm`:
-
-```sh
-  npm install -g http-server
-```
-
-Fire up the server:
-
-```sh
-  http-server client/
-```
-
-Once you've run those commands, you should be able to access the server at <http://localhost:8080>. If you see a login form at that point, then you did everything correctly and are ready for the course.
-
-## Proxy Issues
-
-While running the above commands you might get errors related to proxies.  If this is the case, you'll need to configure your command-line tools to handle proxies.
-
-### Git
-This most likely means that you are behind a proxy that blocks SSH access to Github. In this case, run the following command:
-
-```sh
-  git config --global url."https://".insteadOf git://
-```
-
-Then re-run the failed command.
-
-It's a somewhat blunt weapon, but should work in most cases. If this doesn't work, and if you know the URL of your proxy server, you can try this:
-
-```sh
-git config —global http.proxy <proxy server url>
-```
-
-### npm
-
-```sh
-npm config set proxy <proxy server url>
-```
-
-### bower
-
-```sh
-echo '"proxy": "<proxy server url>"' >> .bowerrc
-echo '"https-proxy": "<proxy server url>"' >> .bowerrc
+  cd react-workshop/base
+  npm install
+  npm start
 ```
