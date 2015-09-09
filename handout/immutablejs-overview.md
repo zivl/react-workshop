@@ -349,7 +349,7 @@ _saveTodo(todo) {
 }
 ```
 
-The following function `_completeTodo()` toggles a **todo item** from incomplete to completed and vice versa. We can simply do that by going through all TODO items and changing the `selected` property to its opposite boolean value. `List` provides a `map` method which I used to map the selected item from the TODO list. Then I used the `set` method to toggle the value of the `selected` property.
+The following function `_completeTodo()` toggles a **todo item** from incomplete to completed and vice versa.
 
 ```js
 _completeTodo(index) {
