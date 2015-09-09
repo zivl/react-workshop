@@ -7,7 +7,7 @@
 ### MVC vs. Flux
 
   - MVC - **M**odel **V**iew **C**ontrol
-  - Flux - 
+  - Flux -
 
 The MVC architecture is consisted of **models** and **views**.
 
