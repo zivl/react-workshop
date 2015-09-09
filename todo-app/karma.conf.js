@@ -29,11 +29,11 @@ module.exports = function (config) {
       devtool: 'inline-source-map',
       module: {
         loaders: [
-          { test: /\.js$/, loader: 'babel-loader' }
+          { test: /\.js$/, loader: 'babel-loader?stage=0' }
         ],
-        postLoaders: [ { // << add subject as webpack's postloader
+        postLoaders: [ {
             test: /\.js$/,
-            exclude: /(test|node_modules|bower_components)\//,
+            exclude: /(test|test\.js|node_modules)/,
             loader: 'istanbul-instrumenter'
         }]
       }
