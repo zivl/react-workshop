@@ -176,6 +176,7 @@ var list3 = list2.pop();
 
 console.log(list3.toArray()); // [1, 2, 3]
 ```
+**[Run Code](http://jsfiddle.net/9ese0zvs/)**
 
 ### Map
 Map is an unordered KeyedIterable of (key, value) pairs.
