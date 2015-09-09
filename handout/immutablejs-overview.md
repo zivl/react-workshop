@@ -92,7 +92,7 @@ console.log(newArr.toArray()); // [1, 2, 3, 4] <= the new modified array
 We can create **immutable** objects in JavaScript without using any external libraries. This can be done by the use of the **ES5** and **ES6** `Object.assign()` and `Object.freeze`.
 ```js
 var a = [1,2,3,4]
-var a_copy = Object.assign({}, a);
+var a_copy = Object.assign([], a);
 
 a.push(5)
 
@@ -107,6 +107,7 @@ a_copy.push(900);
 a_copy[0] = 600;
 console.log(a_copy);  // [600, 2, 3, 4, 5, 900];
 ```
+`Object.assign` is used to assign the values of `a` to an empty array which results in creating its copy which we call `a_copy`. Then we use `Object.freeze` to freeze our array `a` so that it can no longer be mutated.
 
 ### Structural Sharing
 
