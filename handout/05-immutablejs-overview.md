@@ -290,6 +290,7 @@ console.log(person1.get('friends').toJS()); // []
 console.log(person2.get('friends').toJS()); // we have 2 friends, see image below
 ```
 **[Run Code](http://jsfiddle.net/t3L433ko/)**
+
 ![](https://raw.githubusercontent.com/rangle/react-workshop/immutable-writeup/handout/assets/debug-map-1.png)
 
 To check the complete ImmutableJS API follow this [link](https://facebook.github.io/immutable-js/docs/#/).
