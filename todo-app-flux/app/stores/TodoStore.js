@@ -73,6 +73,6 @@ class TodoStore extends EventEmitter {
       break;
     }
   }
-};
+}
 
 export default new TodoStore();

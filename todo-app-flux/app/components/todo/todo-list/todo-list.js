@@ -2,6 +2,16 @@ import React from 'react';
 
 export default class TodoList extends React.Component {
 
+  static propTypes = {
+    todos: React.PropTypes.array,
+    onDelete: React.PropTypes.func.isRequired,
+    onComplete: React.PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    todos: []
+  }
+
   render() {
     var { todos, onDelete, onComplete } = this.props;
 
@@ -28,13 +38,3 @@ export default class TodoList extends React.Component {
     );
   }
 }
-
-TodoList.propTypes = {
-  todos: React.PropTypes.array,
-  onDelete: React.PropTypes.func.isRequired,
-  onComplete: React.PropTypes.func.isRequired,
-};
-
-TodoList.defaultProps = {
-  todos : []
-};

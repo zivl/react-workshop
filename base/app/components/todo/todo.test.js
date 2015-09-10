@@ -3,14 +3,14 @@ import TestUtils from 'react/lib/ReactTestUtils';
 import expect from 'expect';
 import Todo from "./todo";
 
-describe('todo', function () {
+describe('todo', () => {
   var _component
 
-  beforeEach(function() {
+  beforeEach(() => {
     _component = TestUtils.renderIntoDocument( <Todo /> );
   });
 
-  it('renders without problems', function () {
+  it('renders without problems', () => {
     expect(_component).toExist();
   });
 
