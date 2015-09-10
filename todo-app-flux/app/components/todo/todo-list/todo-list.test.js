@@ -54,7 +54,6 @@ describe('todo-list', () => {
     });
 
     afterEach(() => {
-      console.log('hi');
       React.unmountComponentAtNode(document.body);
     });
 
