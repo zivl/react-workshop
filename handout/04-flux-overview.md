@@ -36,7 +36,7 @@ Similarly, we can have something like this:
 }
 ```
 
-## Action Creator
+### Action Creator
 Action creators are functions which create `actions` and sends them through the **Dispatcher**.
 
 ```js
@@ -61,12 +61,13 @@ handleViewAction(action) {
 
 ---
 **Note:** The side effect in the `handleViewAction()` is something that we would want to avoid in the future, but for the purpose of this course we would leave it as it is.
+
 ---
 
-## Dispatcher
+### Dispatcher
 **Dispatcher** is a single mechanism which controls the data flow in a **Flux** application. It ensures that no more than one action is dispatched to the **Store** in a specific order (synchronously). It provides a `waitFor` method to ensures that the actions happen in the order in which they come in.
 
-## Store
+### Store
 The **Stores** bring all the other Flux components together. They contain the application logic and keep its **state**.
 Also, **stores** listen for actions from the **dispatcher**, in order to get notified and to update the state. So when an action triggers a state change, the stores broadcast an event to all the view components that are listening. When that happens the view components update themselves.
 
