@@ -2,7 +2,7 @@
 
 ### MVC vs. Flux
 
-**MVC** stands for **M**odel **V**iew **C**ontroller and is an architecture in which the data flows in two directions. The data flows from the models to the views which means that the number of data pipelines increases as we introduce more models and views. This graph of bidirectional data flows becomes very complicated to grasp and maintain as the application scales.
+**MVC** stands for **M**odel **V**iew **C**ontroller and is an architecture in which the data flows in two directions. The data flows from the models to the views and vice versa. This means that the number of data pipelines increases as we introduce more models and views. This graph of bidirectional data flows becomes very complicated to grasp and maintain as the application scales.
 
 Flux on the other hand has a unidirectional flow of data. This architecture is consisted of four main parts:
 
