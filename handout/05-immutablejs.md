@@ -8,7 +8,9 @@
   5. Todo app with ReactJS and ImmutableJS
 
 ### Mutable vs. Immutable
-**Mutable** data can be changed by replacing itself with new one. Mutation of data makes application development difficult because it makes the following things hard:
+Mutable data is data that can be changed in place.
+
+Mutable data makes application development difficult because it makes the following things hard:
 
   1. Keeping track of mutated data, and
   2. Maintaining application state
