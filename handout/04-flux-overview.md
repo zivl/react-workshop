@@ -68,6 +68,6 @@ handleViewAction(action) {
 **Dispatcher** is a single mechanism which controls the data flow in a **Flux** application. It ensures that no more than one action is dispatched to the **Store** in a specific order (synchronously). It provides a `waitFor` method to ensures that the actions happen in the order in which they come in.
 
 ### Store
-The **Stores** bring all the other Flux components together. They contain the application logic and keep its **state**.
-Also, **stores** listen for actions from the **dispatcher**, in order to get notified and to update the state. So when an action triggers a state change, the stores broadcast an event to all the view components that are listening. When that happens the view components update themselves.
+The **Stores** bring all the other Flux components together. They contain the application logic and the **state**.
+Also, **stores** listen for actions from the **dispatcher**, in order to get notified about when to update the state. So when an action triggers a state change, the stores broadcast an event to all the view components that are listening. When that happens the view components update themselves.
 
