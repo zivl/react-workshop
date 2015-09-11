@@ -29,7 +29,7 @@ export default class TodoForm extends React.Component {
 
   saveTodo = () => {
     var { newTodo } = this.refs;
-    var { onSave, todos } = this.props;
+    var { onSave } = this.props;
     var value = React.findDOMNode(newTodo).value;
 
     if (!value) {
