@@ -11,18 +11,10 @@ export default class Todo extends React.Component {
   }
 
   static defaultProps = {
-    children : 'My Todo App'
+    children: 'My Todo App'
   }
 
-  state = {
-    todoList: [{
-      item: 'Learn React',
-      selected: false
-    }, {
-      item: 'Learn Flux',
-      selected: false
-    }]
-  }
+  state = {};
 
   componentDidMount() {
     TodoStore.addChangeListener(this.handleStoreChange);
