@@ -37,14 +37,14 @@ describe('todo', () => {
   });
 
   it('_saveTodo: should save todo to state', () => {
-    _component._saveTodo('test 3', mockState.todoList);
+    _component._saveTodo('test 3');
     expect(_component.state.todoList[2].item).toBe('test 3');
     expect(_component.state.todoList[2].selected).toBe(false);
   });
 
   it('_deleteTodo: should remove todo from state', () => {
     expect(_component.state.todoList.length).toBe(2);
-    _component._deleteTodo(mockState.todoList[0], mockState.todoList);
+    _component._deleteTodo(mockState.todoList[0]);
     expect(_component.state.todoList.length).toBe(1);
     expect(_component.state.todoList[0].item).toBe('test 2');
   });

@@ -9,7 +9,7 @@ export default class Todo extends React.Component {
   }
 
   static defaultProps = {
-    children : 'My Todo App'
+    children: 'My Todo App'
   };
 
   state = {
@@ -33,15 +33,15 @@ export default class Todo extends React.Component {
         <TodoList todos={todoList}
                   onDelete={this._deleteTodo}
                   onComplete={this._completeTodo} />
-        <TodoForm todos={todoList}
-                  onSave={this._saveTodo} />
+        <TodoForm onSave={this._saveTodo} />
       </div>
     );
   }
 
-  _saveTodo = (todo, todos) => {
+  _saveTodo = (todo) => {
+    var { todoList } = this.state;
     this.setState({
-      todoList: todos.concat({
+      todoList: todoList.concat({
         item: todo,
         selected: false
       })
@@ -60,9 +60,10 @@ export default class Todo extends React.Component {
     });
   }
 
-  _deleteTodo = (todo, todos) => {
+  _deleteTodo = (todo) => {
+    var { todoList } = this.state;
     this.setState({
-      todoList: todos.filter(value => {
+      todoList: todoList.filter(value => {
         return value !== todo;
       })
     });

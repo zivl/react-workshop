@@ -3,7 +3,6 @@ import React from 'react';
 export default class TodoForm extends React.Component {
 
   static propTypes = {
-    todos: React.PropTypes.array,
     onSave: React.PropTypes.func.isRequired
   }
 
@@ -38,6 +37,6 @@ export default class TodoForm extends React.Component {
     }
 
     React.findDOMNode(newTodo).value = null;
-    onSave(value, todos);
+    onSave(value);
   }
 }
