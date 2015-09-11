@@ -10,7 +10,7 @@ export default class TodoHistory extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='historyControls'>
         <button onClick={this._goBackward} type="button">&#x27f8;</button>
         <span> Todo History </span>
         <button onClick={this._goForward} type="button">&#x27f9;</button>
