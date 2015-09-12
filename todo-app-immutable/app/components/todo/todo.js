@@ -6,25 +6,24 @@ import TodoHistory from './todo-history/todo-history';
 
 export default class Todo extends React.Component {
 
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    children: React.PropTypes.string,
+  };
 
-    this.state = {
-      data: Map({
-        todoList: List()
-      })
-    };
+  static defaultProps = {
+    children : 'My Todo App'
+  };
 
-    this.history = Map({
-      backward: List(),
-      forward: List()
-    });
-    this._saveTodo = this._saveTodo.bind(this);
-    this._deleteTodo = this._deleteTodo.bind(this);
-    this._completeTodo = this._completeTodo.bind(this);
-    this._traverseHistory = this._traverseHistory.bind(this);
-    this._recordHistory = this._recordHistory.bind(this);
-  }
+  state = {
+    data: Map({
+      todoList: List()
+    })
+  };
+
+  history = Map({
+    backward: List(),
+    forward: List()
+  });
 
   render() {
     var todoList = this.state.data.get('todoList');
@@ -43,12 +42,12 @@ export default class Todo extends React.Component {
     );
   }
 
-  _recordHistory() {
+  _recordHistory = () => {
     this.history = this.history.update('backward', (historyList) =>
       historyList.push(this.state.data));
   }
 
-  _traverseHistory(direction) {
+  _traverseHistory = (direction) => {
     var { data } = this.state;
     var { history } = this;
 
@@ -68,7 +67,7 @@ export default class Todo extends React.Component {
     });
   }
 
-  _saveTodo(todo) {
+  _saveTodo = (todo) => {
     this._recordHistory();
 
     this.setState(({data}) => ({
@@ -81,7 +80,7 @@ export default class Todo extends React.Component {
     }));
   }
 
-  _completeTodo(index) {
+  _completeTodo = (index) => {
     this._recordHistory();
 
     this.setState(({data}) => ({
@@ -94,7 +93,7 @@ export default class Todo extends React.Component {
     }));
   }
 
-  _deleteTodo(todoIndex) {
+  _deleteTodo = (todoIndex) => {
     this._recordHistory();
 
     this.setState(({data}) => ({
@@ -104,10 +103,3 @@ export default class Todo extends React.Component {
   }
 }
 
-Todo.propTypes = {
-  children: React.PropTypes.string,
-};
-
-Todo.defaultProps = {
-  children : 'My Todo App'
-};
