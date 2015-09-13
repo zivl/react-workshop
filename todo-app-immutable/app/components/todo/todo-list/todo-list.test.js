@@ -4,7 +4,7 @@ import TestUtils from 'react/lib/ReactTestUtils';
 import expect from 'expect';
 import TodoList from "./todo-list";
 
-describe('todo-list', function () {
+describe('todo-list', () => {
 
   let _component;
   let _todoList;
@@ -12,7 +12,7 @@ describe('todo-list', function () {
   let _onComplete;
   var node, html, closeButtons;
 
-  beforeEach(function (done) {
+  beforeEach((done) => {
     _todoList = Immutable.fromJS([{
       "item": "test 1",
       "selected": false
@@ -29,7 +29,7 @@ describe('todo-list', function () {
 
     React.render(
       <TodoList todos={_todoList} onDelete={_onDelete} onComplete={_onComplete} />,
-      document.body, function () {
+      document.body, function() {
         node = React.findDOMNode(this);
         html = node.innerHTML;
         closeButtons = node.querySelectorAll('li button');
@@ -38,11 +38,11 @@ describe('todo-list', function () {
     );
   });
 
-  afterEach(function () {
+  afterEach(() => {
     React.unmountComponentAtNode(document.body);
   });
 
-  it('renders with two todos', function () {
+  it('renders with two todos', () => {
     expect(_component).toExist();
     expect(_component.props.todos.get(0).get('item')).toEqual('test 1');
     expect(_component.props.todos.get(1).get('item')).toEqual('test 2');
