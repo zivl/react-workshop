@@ -2,6 +2,10 @@ import React from 'react';
 
 export default class TodoForm extends React.Component {
 
+  static propTypes = {
+    onSave: React.PropTypes.func.isRequired
+  };
+
   render() {
     var props = {
       ref: 'newTodo',
@@ -14,15 +18,15 @@ export default class TodoForm extends React.Component {
         <input {...props}
                onKeyDown={(event) => {
                  if (event.keyCode === 13) {
-                   this.saveTodo();
+                   this._saveTodo();
                  }
                }}/>
-        <button onClick={this.saveTodo.bind(this)}>Add</button>
+        <button onClick={this._saveTodo}>Add</button>
       </div>
     );
   }
 
-  saveTodo() {
+  _saveTodo = () => {
     var { newTodo } = this.refs;
     var { onSave } = this.props;
     var value = React.findDOMNode(newTodo).value;
@@ -36,6 +40,3 @@ export default class TodoForm extends React.Component {
   }
 }
 
-TodoForm.propTypes = {
-  onSave: React.PropTypes.func.isRequired
-};

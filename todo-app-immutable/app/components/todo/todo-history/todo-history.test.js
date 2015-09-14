@@ -3,7 +3,7 @@ import TestUtils from 'react/lib/ReactTestUtils';
 import expect from 'expect';
 import TodoHistory from "./todo-history";
 
-describe('todo-history', function () {
+describe('todo-history', () => {
 
   let _component;
   let _traverseHistory;
@@ -13,15 +13,15 @@ describe('todo-history', function () {
     _component = TestUtils.renderIntoDocument( <TodoHistory traverseHistory={_traverseHistory} /> );
   });
 
-  it('renders without problems', function () {
+  it('renders without problems', () => {
     expect(_component).toExist();
   });
 
-  it('should contain _goBackward', function () {
+  it('should contain _goBackward', () => {
     expect(_component._goBackward).toExist();
   });
 
-  it('should contain _goForward', function () {
+  it('should contain _goForward', () => {
     expect(_component._goForward).toExist();
   });
 });
