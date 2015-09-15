@@ -115,7 +115,7 @@ class MyComponent extends React.Component {
 
 #### ![gotcha](assets/trip.png) GOTCHA #1
 
-Note that the html in our render function (actually this is JSX, but we will get to that in a second) must be wrapped withing a single root tag.
+Note that the html in our render function (actually this is JSX, but we will get to that in a second) must be wrapped within a single root tag.
 
 For example the below would display the following error in the console.
 
@@ -157,7 +157,7 @@ class HelloWorld extends React.Component {
 In the above example I've added a className to the div of our component - but wait className not class?
 
 
-React using the property className, at first I forgot about this alot and used class instead - this is usually a common mistake when starting out.
+React uses the property className, not class. This is a common repeat mistake when starting out.
 
 
 ```js
@@ -171,7 +171,7 @@ class HelloWorld extends React.Component {
 }
 ```
 
-Luckly React has some amazing console warning/error logging to help keep us productive.
+Luckly React has some amazing console warnings/errors to help keep us productive.
 
 
 ```
@@ -219,7 +219,7 @@ Since we don't want to have all our components living in the same file it make s
 
 Since we are using babel and have the benfit to use ES6 it makes sense to move away from ```require``` and towards ES6 modules.
 
-In the case about, we could create a HelloWorld.js file, add our component class and export the module:
+In the case above we could create a HelloWorld.js file, add our component class, and export the module:
 
 
 ```js
@@ -280,7 +280,7 @@ export class HelloWorld extends React.Component {
 
 ### CSS/Sass with React
 
-You may be thinking, how can we include our some styles into our app?
+You may be thinking, how can we include our styles into our app?
 
 Say we have the following css...
 
@@ -291,7 +291,7 @@ Say we have the following css...
 }
 ```
 
-Well, just like how we import libarays and components we can import css/sass.
+We import css and sass the same way we import libraries and components.
 
 ```
 import './main.css';

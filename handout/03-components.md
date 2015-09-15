@@ -2,7 +2,7 @@
 
 Lets build a todo list app.
 
-First lets break down our app into module, compassable components. For the todo app example, we will have the following structure.
+First lets break down our app into module, composable components. For this todo app example, we will have the following structure.
 
 ![app-overview](./assets/app-overview.png)
 
@@ -18,7 +18,7 @@ First lets break down our app into module, compassable components. For the todo 
 
 ---
 
-First we build the **TodoList** component, its sole purpose at this time will be to display todo items.
+First lets build the **TodoList** component, its sole purpose at this time will be to display todo items.
 
 ```js
 // todo-list.js
@@ -56,7 +56,7 @@ export default class Todo extends React.Component {
 }
 ```
 
-And finialy we render **Todo** by calling ``` React.render ``` passing in the **component** to render and the **dom node** to render at.
+And finialy we render **Todo** by calling ``` React.render ``` passing in the **component** to render and a **DOM node** to render at.
 ```js
 // app.js
 
@@ -74,9 +74,15 @@ React.render(<Todo />, document.getElementById('app'));
 
 ![props](./assets/props.png)
 
-Before we go any further we need to look at Component Properties.
+Before we go any further we need to look at component properties.
 
-Its helpful to think of components as **functions** and props as **parameters** to functions. Props allow us to pass data and functions ‘downstream’ to components.
+Its helpful to think of components as **functions** and props as **parameters** to these functions.
+
+```js
+this.props
+```
+
+Props allow us to pass data and functions ‘downstream’ to components.
 
 --
 
@@ -144,7 +150,7 @@ this.props.y
 #### Props - this.props.children
 
 
-Instead of hardcoding the title into our **Todo** component, lets pass it down, not as a property on the component but instead as the child element.
+Instead of hardcoding the title into our **Todo** component, lets pass it down as a child property on the component.
 
 
 ```js
@@ -202,7 +208,7 @@ class TodoItem extends React.Component {
 
 #### Props - Templating
 
-Passing todo items indiviulis into our **TodoList** component just isn't alot of fun, plus we have to make a knew component for each item - this doesn't seem right.
+passing todo items individually into our **TodoList** component just isn't alot of fun, plus we have to make an new component for each item - this doesn't seem right.
 
 
 ```js
@@ -237,7 +243,7 @@ class Todo extends React.Component {
 
 We would now have access to them via ``` this.props.todos ``` within our **TodoList** component.
 
-Now to generate some markup (using map) to contain our todo list items, we will store this JSX markup in a variable called **rows**.
+We can use map to iterate over our todo list and generate the JSX markup.
 
 
 ```js
@@ -264,7 +270,7 @@ class TodoList extends React.Component {
 
 #### Props - Key
 
-This works though React will through a warning in the console.
+This works but React will throw a warning in the console.
 
 ```Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of TodoList. See http://fb.me/react-warning-keys for more information```
 
@@ -461,7 +467,7 @@ Its good practice to store all your components state within your 'root' componen
 
 --
 
-Lets refactor our array that hold the todo items into our root components state.
+Lets refactor our array that holds the todo items into our root components state.
 
 In react, the constructor function of the class is used to setup intial state.
 
@@ -551,7 +557,7 @@ class Todo extends React.Component {
 ### Refs
 
 
-The **TodoForm** component will contain a input field and a button. The Button will It will create and save new todo items.
+The **TodoForm** component will contain an input field and a button.
 
 
 ```js
@@ -744,7 +750,7 @@ class Todo extends React.Component {
 
 ```this.state``` should only contain the data required to represent your UI's state.
 
-Most of your components should only retrieve data from props and render it. As well as function from props that provide methods to alter the parent components state.
+Most of your components should only retrieve data from props and render it. If they need to alter state, they should use functions that have been passed down as props.
 
 --
 
