@@ -20,12 +20,23 @@ export default class Todo extends React.Component {
       <div className='app'>
         <h2>{this.props.children}</h2>
         <TodoList items={this.state.todos}
-                  onDelete={this._deleteTodo} />
+                  onDelete={this._deleteTodo}
+                  onToggle={this._toggleTodo} />
         <TodoForm onSave={this._saveTodo} />
       </div>
     );
   }
 
+  _toggleTodo = (todo) => {
+      this.setState({
+        todos: this.state.todos.map(value => {
+          if (todo === value) {
+             value.selected = !value.selected;
+          }
+          return value;
+        })
+      })
+  }
 
   _deleteTodo = (todo) => {
     this.setState({
