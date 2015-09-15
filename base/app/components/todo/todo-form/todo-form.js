@@ -8,7 +8,7 @@ export default class TodoForm extends React.Component {
       ref: 'newTodo',
       type: 'text',
       placeholder: 'new todos'
-    }
+    };
 
     return (
       <div>
