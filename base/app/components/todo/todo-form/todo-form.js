@@ -3,9 +3,16 @@ import React from 'react';
 export default class TodoForm extends React.Component {
 
   render() {
+    var props = {
+      onKeyDown: this.handleKeyDown,
+      ref: 'newTodo',
+      type: 'text',
+      placeholder: 'new todos'
+    }
+
     return (
       <div>
-        <input onKeyDown={this.handleKeyDown} ref='newTodo' type='text' placeholder='new todos' />
+        <input {...props} />
         <button onClick={this.saveTodo}>Add</button>
       </div>
     );
@@ -22,6 +29,4 @@ export default class TodoForm extends React.Component {
     this.props.onSave(value);
     React.findDOMNode(this.refs.newTodo).value = null;
   }
-
-
 }
