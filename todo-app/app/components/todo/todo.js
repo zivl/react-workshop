@@ -9,17 +9,22 @@ export default class Todo extends React.Component {
   }
 
   static defaultProps = {
-    children: 'My Todo App'
+    children: 'My Default Todo App'
   };
 
-  state = {
-    todoList: [{
-      item: 'Learn React',
-      selected: false
-    }, {
-      item: 'Learn Flux',
-      selected: false
-    }]
+  state = {};
+
+  componentDidMount() {
+    var defaultData = {
+      todoList: [{
+        item: 'Learn React',
+        selected: false
+      }, {
+        item: 'Learn Flux',
+        selected: false
+      }]
+    }
+    this.setState(JSON.parse(localStorage.getItem('todo')) || defaultData);
   }
 
   render() {
@@ -38,6 +43,10 @@ export default class Todo extends React.Component {
     );
   }
 
+  updateStorage = () => {
+    localStorage.setItem('todo', JSON.stringify(this.state));
+  }
+
   _saveTodo = (todo) => {
     var { todoList } = this.state;
     this.setState({
@@ -45,7 +54,8 @@ export default class Todo extends React.Component {
         item: todo,
         selected: false
       })
-    });
+    }, this.updateStorage);
+
   }
 
   _completeTodo = (completedTodo) => {
@@ -57,7 +67,7 @@ export default class Todo extends React.Component {
         }
         return todo;
       })
-    });
+    }, this.updateStorage);
   }
 
   _deleteTodo = (todo) => {
@@ -66,6 +76,6 @@ export default class Todo extends React.Component {
       todoList: todoList.filter(value => {
         return value !== todo;
       })
-    });
+    }, this.updateStorage);
   }
 }
