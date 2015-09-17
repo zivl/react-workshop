@@ -32,7 +32,7 @@ export default class Todo extends React.Component {
     return (
       <div className='app'>
 
-        <h2>{children}</h2>
+        <h2 className='header'>{children}</h2>
         <TodoHistory traverseHistory={this._traverseHistory} />
         <TodoList todos={todoList}
                   onDelete={this._deleteTodo}
