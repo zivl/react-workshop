@@ -19,7 +19,7 @@ export default class TodoList extends React.Component {
       return (
         <li key={index}>
           <button onClick={onDelete.bind(null, value, todos)}>X</button>
-          <label className={value.selected ? 'todo-item-completed' : 'todo-item'}
+          <label className={value.selected ? 'todo-item--is-completed' : 'todo-item'}
                  onClick={onComplete.bind(null, value)}>{value.item}
           </label>
 
@@ -28,7 +28,7 @@ export default class TodoList extends React.Component {
     });
 
     if (todos.length <= 0) {
-      return (<div>Nothing Here!</div>);
+      return (<h3>Nothing Here!</h3>);
     }
 
     return (
