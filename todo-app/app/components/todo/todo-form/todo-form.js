@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Radium from 'radium';
 
+@Radium
 export default class TodoForm extends React.Component {
 
   static propTypes = {
@@ -16,8 +18,13 @@ export default class TodoForm extends React.Component {
 
     return (
       <div>
-        <input {...props} onKeyDown={this.handleEnterKey}/>
-        <button onClick={this.saveTodo}>Add</button>
+        <input {...props} onKeyDown={ this.handleEnterKey }/>
+        <button style={ [
+                        styles.addButton,
+                        styles.highlight
+                      ] } onClick={ this.saveTodo }>
+          Add
+        </button>
       </div>
     );
   }
@@ -41,3 +48,17 @@ export default class TodoForm extends React.Component {
     onSave(value);
   }
 }
+
+const styles = {
+  addButton: {
+    outline: 'none',
+    color: '#FFFFFF',
+    backgroundColor: '#ACEBC3',
+    border: '2px solid #50b475'
+  },
+  highlight: {
+    ':hover': {
+      backgroundColor: '#E6EFE9'
+    }
+  }
+};
