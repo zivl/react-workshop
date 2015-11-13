@@ -29,11 +29,11 @@ export default class Todo extends React.Component {
     return (
       <div className='app'>
 
-        <h2 className='header'>{children}</h2>
-        <TodoList todos={todoList}
-                  onDelete={this._deleteTodo}
-                  onComplete={this._completeTodo} />
-        <TodoForm onSave={this._saveTodo} />
+        <h2 className='header'>{ children }</h2>
+        <TodoList todos={ todoList }
+                  onDelete={ this._deleteTodo }
+                  onComplete={ this._completeTodo } />
+        <TodoForm onSave={ this._saveTodo } />
       </div>
     );
   }
