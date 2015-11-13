@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 export default class TodoForm extends React.Component {
 
@@ -30,13 +31,13 @@ export default class TodoForm extends React.Component {
   saveTodo = () => {
     var { newTodo } = this.refs;
     var { onSave } = this.props;
-    var value = React.findDOMNode(newTodo).value;
+    var value = newTodo.value;
 
     if (!value) {
       return;
     }
 
-    React.findDOMNode(newTodo).value = null;
+    newTodo.value = null;
     onSave(value);
   }
 }
