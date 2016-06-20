@@ -1,0 +1,9 @@
+1. start from the basics, babel, JSX, ES6, REACT
+2. add items hard-codedly
+3. add form to add items
+4. pass props to TodoList and use Array.map() to render them
+5. add on click to that button in the form and talk about binding
+6. state to use react dom and not jQuery for DOM staff
+7. add delete functionality
+8. add toggle functionality
+9. add counting functionality

@@ -1,10 +1,10 @@
 import React from 'react';
 import TestUtils from 'react/lib/ReactTestUtils';
 import expect from 'expect';
-import Todo from "./todo";
+import Todo from "./todo.jsx";
 
 describe('todo', () => {
-  var _component
+  var _component;
 
   beforeEach(() => {
     _component = TestUtils.renderIntoDocument( <Todo /> );

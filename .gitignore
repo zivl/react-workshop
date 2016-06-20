@@ -7,3 +7,5 @@ coverage
 .settings
 .idea
 *.log
+workshopSteps.txt
+

@@ -3,7 +3,7 @@ var webpack = require('webpack');
 module.exports = function (config) {
   config.set({
 
-    browsers: [ process.env.CONTINUOUS_INTEGRATION ? 'Firefox' : 'Chrome' ],
+    //browsers: [ process.env.CONTINUOUS_INTEGRATION ? 'Firefox' : 'Chrome' ],
 
     singleRun: true,
 
@@ -29,7 +29,7 @@ module.exports = function (config) {
       devtool: 'inline-source-map',
       module: {
         loaders: [
-          { test: /\.js$/, loader: 'babel-loader?stage=0' }
+          { test: /\.(js|jsx)$/, loader: 'babel-loader' }
         ],
         postLoaders: [ {
             test: /\.js$/,

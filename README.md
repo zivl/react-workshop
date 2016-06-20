@@ -1,6 +1,6 @@
 ### React Workshop
 
-![react](handout/assets/react_logo.png)
+![react](docs/assets/react_logo.png)
 
 
 This repository contains docs materials and code for React workshop, focusing on building applications using React and Webpack.
