@@ -11,6 +11,9 @@ This repository contains docs materials and code for React workshop, focusing on
 ###### Running workshop
 
 ```bash
+
+git clone https://github.com/zivl/react-workshop.git
+
 npm install
 
 npm start // http://localhost:8080/

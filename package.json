@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --progress",
+    "start": "webpack-dev-server --progress",
     "build": "NODE_ENV=production webpack -p",
     "test": "karma start"
   },
@@ -24,8 +24,10 @@
     "jsx-loader": "^0.13.2",
     "karma": "^0.13.22",
     "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^1.0.1",
     "karma-cli": "^1.0.0",
     "karma-coverage": "^1.0.0",
+    "karma-firefox-launcher": "^1.0.0",
     "karma-mocha": "^1.0.1",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.7.0",
