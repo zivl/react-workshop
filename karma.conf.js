@@ -3,7 +3,7 @@ var webpack = require('webpack');
 module.exports = function (config) {
   config.set({
 
-    //browsers: [ process.env.CONTINUOUS_INTEGRATION ? 'Firefox' : 'Chrome' ],
+    browsers: [ process.env.CONTINUOUS_INTEGRATION ? 'Firefox' : 'Chrome' ],
 
     singleRun: true,
 
@@ -15,7 +15,7 @@ module.exports = function (config) {
 
     preprocessors: {
       'tests.webpack.js': [ 'webpack', 'sourcemap' ],
-      'src/**/*.js': ['coverage']
+      'src/**/*.jsx': ['coverage']
     },
 
     reporters: [ 'progress', 'coverage'],
